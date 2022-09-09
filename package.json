@@ -1,0 +1,28 @@
+{
+  "name": "ferry-booking",
+  "version": "0.0.1",
+  "description": "This is a small ReactJS project using the CDN, with no node server. This Project can be used on Websites that run apache and is not required to use node.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+   "start": "webpack serve --open",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixaschultz/ferry_booking.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felixaschultz/ferry_booking/issues"
+  },
+  "homepage": "https://github.com/felixaschultz/ferry_booking#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "node-localdb": "0.0.3",
+    "socketio": "^1.0.0"
+  },
+  "proxy": "http://localhost:5000"
+}
