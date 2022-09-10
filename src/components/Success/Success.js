@@ -21,7 +21,7 @@ export default function SuccessWindow(props) {
         <>
             <article>
                 <section>
-                    <h2>Tilgængelige ruter:</h2>
+                    <h2>Tilgængelige afgange:</h2>
                     <p>From: { props.values.fromharbor }</p>
                     <p>To: {props.values.toharbor}</p>
                     <p>Antal Personer: {props.values.passangerCount}</p>
