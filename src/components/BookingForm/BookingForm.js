@@ -183,7 +183,7 @@ export default function BookingForm(props) {
                 (isLoading) ? "We are searching..." : null
             }
             {
-                (viewResult) ? <SuccessWindow values={apiResults} /> : null
+                (viewResult) ? <SuccessWindow values={apiResults} order={ JSON.stringify(order) } /> : null
             }
             {
                 (apiResults == "No results") ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
