@@ -152,7 +152,7 @@ export default function BookingForm(props) {
                     </label>
                     <label className="booking__label" for="date">
                         <span className="booking__labelsize">Antal personer:</span>
-                        <input type="tel" className="booking__input" value="1" placeholer="0" onChange={e => { setPassagner(e.target.value) }} />
+                        <input type="tel" className="booking__input" value={passagener} placeholer="0" onChange={e => { setPassagner(e.target.value) }} />
                     </label>
                     <input type="checkbox" id="cycle" name="cycle" onChange={e => { setCycle(!cycle) }} /> <label for="cycle">cykel</label>
                     <button className="booking__submit" disabled={!disabled} type="submit">Søg færge afgang</button>
