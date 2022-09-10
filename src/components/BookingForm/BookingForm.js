@@ -99,16 +99,16 @@ export default function BookingForm(props) {
         fetch("https://www.cykelfaergen.info/booking/test.php", {
             body: JSON.stringify(order),
             method: "post"
-        }).then((r) => r.json()).then((r) => {
-            setIsLoading(false);
+        }).then(async (r) => r.json()).then((r) => {
+            setIsLoading(false);            
             setAPIresults(r);
             if (r != "No results") {
                 setviewResult(true);
             }
-        }).catch(err => {
+        }).catch(async (e) => {
             setIsLoading(false);
-            setAPIresults(err);
-        });
+            setAPIresults(e);
+        })
     }
 
     
