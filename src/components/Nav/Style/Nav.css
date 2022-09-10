@@ -1,0 +1,10 @@
+.navigation{
+    padding: 15px;
+}
+
+.navigation__link{
+    text-decoration: none;
+    color: #000;
+    padding: 15px;
+    display: inline-block;
+}

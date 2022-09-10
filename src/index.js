@@ -1,6 +1,5 @@
-import App from "./modules/app.js";
-
+import App from "./modules/App.js";
 ReactDOM.render(
     <App />,
-    document.getElementById("app")
-)
+    document.getElementById('app')
+);
