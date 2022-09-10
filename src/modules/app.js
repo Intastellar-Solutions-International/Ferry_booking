@@ -21,14 +21,9 @@ export default function App() {
                 <Switch>
                     <Route path="/" exact>
                         <main className="content">
-                            <section class="booking__nav">
-                                <a onclick="openCity(event, 'oneway')" class="booking__navitem booking__navitem--selected" id="one-way"><span class="material-icons">
-                    arrow_right_alt
-                    </span> Enkelt</a>
-                                <a onclick="openCity(event, 'route')" class="booking__navitem" id="tur-retur"><span class="material-icons">swap_horiz</span>Tur-retur</a>
-                                <a onclick="openCity(event, 'eventsejl')" class="booking__navitem" id="event"><span class="material-icons">
-                    event_available
-                    </span> Event</a>
+                            <section className="booking__nav">
+                                <a className="booking__navitem booking__navitem--selected" id="one-way">Enkelt</a>
+                                <a className="booking__navitem" id="event">Event</a>
                             </section>
                             <VoteForm title="Stem på din favorit" from={
                                 [
@@ -36,7 +31,8 @@ export default function App() {
                                     "Marina Minde (Rendbjerg)",
                                     "Brunsnæs",
                                     "Langballigau",
-                                    "Flensborg"
+                                    "Flensborg",
+                                    "Sønderhav"
                                 ]}
                                 to={
                                     [
@@ -44,6 +40,7 @@ export default function App() {
                                         "Brunsnæs",
                                         "Langballigau",
                                         "Flensborg",
+                                        "Sønderhav",
                                         "Egernsund"
                                     ]
                                 }
