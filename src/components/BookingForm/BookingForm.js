@@ -15,6 +15,8 @@ export default function BookingForm(props) {
     const [viewResult, setviewResult] = useState(false);
     const [apiResults, setAPIresults] = useState("");
 
+    const [isLoading, setIsLoading] = useState(false);
+
     /* 
         "Egernsund",
         "Marina Minde (Rendbjerg)",
@@ -88,6 +90,7 @@ export default function BookingForm(props) {
     }
     
     const searchItem = function () {
+        setIsLoading(true);
         order.harbor.to = toHarbor;
         order.harbor.from = fromHarbor;
         order.orderDateTime = date;
@@ -100,12 +103,14 @@ export default function BookingForm(props) {
             }, */
             method: "post"
         }).then((r) => r.json()).then((r) => {
-            if (r != "") {
-                setAPIresults(r);
+            setIsLoading(false);
+            setAPIresults(r);
+            if (r != "No results") {
                 setviewResult(true);
             }
         });
     }
+
 
     return (
         <>
@@ -155,11 +160,17 @@ export default function BookingForm(props) {
                         <input type="tel" className="booking__input" value={passagener} placeholer="0" onChange={e => { setPassagner(e.target.value) }} />
                     </label>
                     <input type="checkbox" id="cycle" name="cycle" onChange={e => { setCycle(!cycle) }} /> <label for="cycle">cykel</label>
-                    <button className="booking__submit" disabled={!disabled} type="submit">Søg færge afgang</button>
+                    <button className="booking__submit" disabled={!disabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
                 </form>
             </section>
             {
+                (isLoading) ? "We are searching..." : null
+            }
+            {
                 (viewResult) ? <SuccessWindow values={apiResults} /> : null
+            }
+            {
+                (apiResults == "No results") ? <p>Sorry we didn´t find any routes...</p> : null
             }
         </>
     )
