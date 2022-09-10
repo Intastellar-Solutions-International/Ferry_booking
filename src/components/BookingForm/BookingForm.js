@@ -1,7 +1,6 @@
 import "./Style/BookingForm.css";
-import SuccessWindow from "../Success/Success.js";
+import SuccessWindow from "../Success/Success";
 const { useState, useSWR } = React;
-import Fetch from "../../fetch.js";
 import Order from "../../class/Order";
 
 export default function BookingForm(props) {
@@ -9,9 +8,12 @@ export default function BookingForm(props) {
     const [first, setfirst] = useState(false);
     const [fromHarbor, setFromHarbor] = useState("");
     const [toHarbor, setToHarbor] = useState("");
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState("12.08.22 15:00");
     const [cycle, setCycle] = useState(false);
     const [passagener, setPassagner] = useState(1);
+    const [disabled, setDisabled] = useState(false);
+    const [viewResult, setviewResult] = useState(false);
+    const [apiResults, setAPIresults] = useState("");
 
     /* 
         "Egernsund",
@@ -91,7 +93,18 @@ export default function BookingForm(props) {
         order.orderDateTime = date;
         order.passangerCount = passagener;
         order.cycle.trueFalse = cycle;
-        console.log(order);    
+        fetch("https://www.cykelfaergen.info/booking/test.php", {
+            body: JSON.stringify(order),
+            /* headers: {
+                "Content-Type": "application/json",
+            }, */
+            method: "post"
+        }).then((r) => r.json()).then((r) => {
+            if (r != "") {
+                setAPIresults(r);
+                setviewResult(true);
+            }
+        });
     }
 
     return (
@@ -104,6 +117,9 @@ export default function BookingForm(props) {
                             <select className="booking__input" id="start" defaultValue={"Start location"} onChange={e => {
                                 checkValue(e.target.value);
                                 setFromHarbor(e.target.value);
+                                if (e.target.value != "") {
+                                    setDisabled(true);
+                                }
                             }}>
                                 <option value={"Start location"} disabled>Vælg havn</option>
                                 {
@@ -118,7 +134,7 @@ export default function BookingForm(props) {
                         <span className="material-icons change"></span>
                         <label className="booking__label booking__label--indent booking__label--leftcircle" for="end">
                             <span className="booking__labelsize">Til:</span>
-                            <select className="booking__input" id="end" defaultValue="End location" onChange={e => { setToHarbor(e.target.value) }}>
+                            <select className="booking__input" id="end" disabled={!disabled} defaultValue="End location" onChange={e => { setToHarbor(e.target.value) }}>
                                 <option value={"End location"} disabled>Vælg havn</option>
                                 {
                                     props?.to?.map((item, key) => {
@@ -132,16 +148,19 @@ export default function BookingForm(props) {
                     </section>
                     <label className="booking__label" for="date">
                         <span className="booking__labelsize">Dato:</span>
-                        <input type="datetime" id="date" className="booking__input" value="12.08.22 15:00" onChange={e => { setDate(e.target.value) }} />
+                        <input type="datetime" id="date" className="booking__input" value={ date } onChange={e => { setDate(e.target.value) }} />
                     </label>
                     <label className="booking__label" for="date">
                         <span className="booking__labelsize">Antal personer:</span>
-                        <input type="tel" className="booking__input" placeholer="0" onChange={e => { setPassagner(e.target.value) }} />
+                        <input type="tel" className="booking__input" value="1" placeholer="0" onChange={e => { setPassagner(e.target.value) }} />
                     </label>
-                    <input type="checkbox" id="cycle" name="cycle" onChange={e => { setCycle(!cycle) }} /> <label for="cycle">Cycle</label>
-                    <button className="booking__submit" type="submit">Søg færge afgang</button>
+                    <input type="checkbox" id="cycle" name="cycle" onChange={e => { setCycle(!cycle) }} /> <label for="cycle">cykel</label>
+                    <button className="booking__submit" disabled={!disabled} type="submit">Søg færge afgang</button>
                 </form>
             </section>
+            {
+                (viewResult) ? <SuccessWindow values={apiResults} /> : null
+            }
         </>
     )
 }
