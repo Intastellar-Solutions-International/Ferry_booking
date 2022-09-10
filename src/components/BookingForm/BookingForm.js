@@ -91,6 +91,8 @@ export default function BookingForm(props) {
     
     const searchItem = function () {
         setIsLoading(true);
+        setAPIresults("");
+        setviewResult(false);
         order.harbor.to = parseInt(toHarbor);
         order.harbor.from = parseInt(fromHarbor);
         order.orderDateTime = new Date(date);
@@ -100,7 +102,7 @@ export default function BookingForm(props) {
             body: JSON.stringify(order),
             method: "post"
         }).then(async (r) => r.json()).then((r) => {
-            setIsLoading(false);            
+            setIsLoading(false);          
             setAPIresults(r);
             if (r != "No results") {
                 setviewResult(true);
@@ -167,7 +169,7 @@ export default function BookingForm(props) {
                     </section>
                     <label className="booking__label" for="date">
                         <span className="booking__labelsize">Dato:</span>
-                        <input type="datetime" id="date" className="booking__input" value={ date } onChange={e => { setDate(e.target.value) }} />
+                        <input type="datetime-local" id="date" className="booking__input" value={ date } onChange={e => { setDate(e.target.value) }} />
                     </label>
                     <label className="booking__label" for="date">
                         <span className="booking__labelsize">Antal personer:</span>
@@ -184,7 +186,7 @@ export default function BookingForm(props) {
                 (viewResult) ? <SuccessWindow values={apiResults} /> : null
             }
             {
-                (apiResults == "No results") ? <p>Sorry we didn´t find any routes. Try mabey to adjust date and time.</p> : null
+                (apiResults == "No results") ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
             }
         </>
     )
