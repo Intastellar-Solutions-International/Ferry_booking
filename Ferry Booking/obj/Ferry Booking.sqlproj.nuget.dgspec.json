@@ -1,0 +1,45 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/Ferry Booking.sqlproj": {}
+  },
+  "projects": {
+    "/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/Ferry Booking.sqlproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/Ferry Booking.sqlproj",
+        "projectName": "Ferry Booking",
+        "projectPath": "/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/Ferry Booking.sqlproj",
+        "packagesPath": "/Users/felixschultz/.nuget/packages/",
+        "outputPath": "/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/obj/",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "/Users/felixschultz/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net46"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net46": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net46": {
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )"
+            }
+          }
+        }
+      }
+    }
+  }
+}

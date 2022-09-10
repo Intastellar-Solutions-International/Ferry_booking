@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "yqmsu9iruw4e4KSIEicBTEem/k3skAwfeibTT6a+fB2JyeTTb4EtTfpwObfpYNoRuH1SDGaHYWyp9ZHq3fm+aQ==",
+  "success": true,
+  "projectFilePath": "/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/Ferry Booking.sqlproj",
+  "expectedPackageFiles": [
+    "/Users/felixschultz/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.0/microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
+    "/Users/felixschultz/.nuget/packages/microsoft.netframework.referenceassemblies.net46/1.0.0/microsoft.netframework.referenceassemblies.net46.1.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

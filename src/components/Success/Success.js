@@ -14,16 +14,20 @@ export default function SuccessWindow(props) {
     const [popup, setPopUp] = useState(false);
     function makePurchase(order) {
         setPopUp(!popup);
+        console.log(order);
     }
 
+    const order = JSON.parse(props.order);
+    const fromHarbor = JSON.parse(order.harbor.from).harbor;
+    const toHarbor = JSON.parse(order.harbor.to).harbor;
 
     return (
         <>
             <article>
                 <section>
                     <h2>Tilgængelige afgange:</h2>
-                    <p>From: { props.values.fromharbor }</p>
-                    <p>To: {props.values.toharbor}</p>
+                    <p>From: {props.values.fromharbor.harborName}</p>
+                    <p>To: {props.values.toharbor.harborName}</p>
                     <p>Antal Personer: {props.values.passangerCount}</p>
                     <p>Dato: { formatDate(new Date(props.values.dep)) }</p>
                     {(!!+props.values.cycle) ? <p>Inkl. cykel</p> : null}
@@ -32,7 +36,12 @@ export default function SuccessWindow(props) {
             </article>
             {(popup) ? <article className="successWindow">
                 <section className="successWindow__content">
-                    <button className="" onClick={ () =>  setPopUp(!popup) }>Close</button>
+                    <button className="" onClick={() => setPopUp(!popup)}>Close</button>
+                    <section className="orderOverview">
+                        <p>Order nr.: {order.orderId}</p>
+                        <p>Dato: {order.orderDateTime}</p>
+                        <p>Fra: {fromHarbor} - til: {toHarbor }</p>
+                    </section>
                 </section>
             </article> : null }
         </>

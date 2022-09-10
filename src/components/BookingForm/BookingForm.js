@@ -93,8 +93,8 @@ export default function BookingForm(props) {
         setIsLoading(true);
         setAPIresults("");
         setviewResult(false);
-        order.harbor.to = parseInt(toHarbor);
-        order.harbor.from = parseInt(fromHarbor);
+        order.harbor.to = toHarbor;
+        order.harbor.from = fromHarbor;
         order.orderDateTime = new Date(date);
         order.passangerCount = passagener;
         order.cycle.trueFalse = cycle;
@@ -125,8 +125,6 @@ export default function BookingForm(props) {
             to.value = temp;
         });
     }
-    
-   
 
     return (
         <>
@@ -146,7 +144,7 @@ export default function BookingForm(props) {
                                 {
                                     props?.from?.map((item, key) => {
                                         return (
-                                            <option value={item.id} key={key}>{ item.harbor }</option>
+                                            <option value={JSON.stringify({id: parseInt(item.id), harbor: item.harbor})} key={key}>{ item.harbor }</option>
                                         )
                                     })
                                 }
@@ -160,7 +158,7 @@ export default function BookingForm(props) {
                                 {
                                     props?.to?.map((item, key) => {
                                         return (
-                                            <option value={item.id} key={key}>{ item.harbor }</option>
+                                            <option value={JSON.stringify({id: parseInt(item.id), harbor: item.harbor})} key={key}>{ item.harbor }</option>
                                         )
                                     })
                                 }

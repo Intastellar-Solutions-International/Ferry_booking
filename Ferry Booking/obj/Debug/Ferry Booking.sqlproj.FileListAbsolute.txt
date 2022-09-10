@@ -1,0 +1,7 @@
+/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/bin/Debug/Ferry Booking.dacpac
+/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/obj/Debug/Model.xml
+/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/obj/Debug/refactor.xml
+/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/obj/Debug/postdeploy.sql
+/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/obj/Debug/predeploy.sql
+/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/obj/Debug/Ferry Booking.dll
+/Users/felixschultz/Documents/Coding/Ferry_booking/Ferry Booking/obj/Debug/Ferry Booking.pdb
