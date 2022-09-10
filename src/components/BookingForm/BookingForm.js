@@ -11,7 +11,7 @@ export default function BookingForm(props) {
     const [date, setDate] = useState("12.08.22 15:00");
     const [cycle, setCycle] = useState(false);
     const [passagener, setPassagner] = useState(1);
-    const [disabled, setDisabled] = useState(false);
+    const [disabled, setDisabled] = useState(true);
     const [viewResult, setviewResult] = useState(false);
     const [apiResults, setAPIresults] = useState("");
 
@@ -139,7 +139,7 @@ export default function BookingForm(props) {
                                 checkValue(e.target.value);
                                 setFromHarbor(e.target.value);
                                 if (e.target.value != "") {
-                                    setDisabled(true);
+                                    setDisabled(false);
                                 }
                             }}>
                                 <option value={"Start location"} disabled>Vælg havn</option>
@@ -155,7 +155,7 @@ export default function BookingForm(props) {
                         <span className="material-icons change"></span>
                         <label className="booking__label booking__label--indent booking__label--leftcircle" for="end">
                             <span className="booking__labelsize">Til:</span>
-                            <select className="booking__input" id="end" disabled={!disabled} defaultValue="End location" onChange={e => { setToHarbor(e.target.value) }}>
+                            <select className="booking__input" id="end" disabled={disabled} defaultValue="End location" onChange={e => { setToHarbor(e.target.value) }}>
                                 <option value={"End location"} disabled>Vælg havn</option>
                                 {
                                     props?.to?.map((item, key) => {
@@ -176,18 +176,20 @@ export default function BookingForm(props) {
                         <input type="tel" className="booking__input" value={passagener} placeholer="0" onChange={e => { setPassagner(e.target.value) }} />
                     </label>
                     <input type="checkbox" id="cycle" name="cycle" onChange={e => { setCycle(!cycle) }} /> <label for="cycle">cykel</label>
-                    <button className="booking__submit" disabled={!disabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
+                    <button className="booking__submit" disabled={disabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
                 </form>
             </section>
-            {
-                (isLoading) ? "We are searching..." : null
-            }
-            {
-                (viewResult) ? <SuccessWindow values={apiResults} order={ JSON.stringify(order) } /> : null
-            }
-            {
-                (apiResults == "No results") ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
-            }
+            <section className="departures_Results">
+                {
+                    (isLoading) ? "We are searching..." : null
+                }
+                {
+                    (viewResult) ? <SuccessWindow values={apiResults} order={ JSON.stringify(order) } /> : null
+                }
+                {
+                    (apiResults == "No results") ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
+                }
+            </section>
         </>
     )
 }
