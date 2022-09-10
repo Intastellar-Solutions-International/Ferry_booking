@@ -91,16 +91,13 @@ export default function BookingForm(props) {
     
     const searchItem = function () {
         setIsLoading(true);
-        order.harbor.to = toHarbor;
-        order.harbor.from = fromHarbor;
-        order.orderDateTime = date;
+        order.harbor.to = parseInt(toHarbor);
+        order.harbor.from = parseInt(fromHarbor);
+        order.orderDateTime = new Date(date);
         order.passangerCount = passagener;
         order.cycle.trueFalse = cycle;
         fetch("https://www.cykelfaergen.info/booking/test.php", {
             body: JSON.stringify(order),
-            /* headers: {
-                "Content-Type": "application/json",
-            }, */
             method: "post"
         }).then((r) => r.json()).then((r) => {
             setIsLoading(false);
@@ -108,9 +105,26 @@ export default function BookingForm(props) {
             if (r != "No results") {
                 setviewResult(true);
             }
+        }).catch(err => {
+            setIsLoading(false);
+            setAPIresults(err);
         });
     }
 
+    
+    const change = document.querySelectorAll(".change");
+    for(let i=0; i<change.length; i++){
+        change[i].addEventListener("click", function () {
+            const from = this.previousElementSibling.childNodes[1];
+            const to = this.nextElementSibling.childNodes[1];
+            
+            const temp = this.previousElementSibling.childNodes[1].value;
+            from.value = to.value;
+            to.value = temp;
+        });
+    }
+    
+   
 
     return (
         <>
@@ -130,7 +144,7 @@ export default function BookingForm(props) {
                                 {
                                     props?.from?.map((item, key) => {
                                         return (
-                                            <option value={item} key={key}>{ item }</option>
+                                            <option value={item.id} key={key}>{ item.harbor }</option>
                                         )
                                     })
                                 }
@@ -144,7 +158,7 @@ export default function BookingForm(props) {
                                 {
                                     props?.to?.map((item, key) => {
                                         return (
-                                            <option value={item} key={key}>{ item }</option>
+                                            <option value={item.id} key={key}>{ item.harbor }</option>
                                         )
                                     })
                                 }
@@ -170,7 +184,7 @@ export default function BookingForm(props) {
                 (viewResult) ? <SuccessWindow values={apiResults} /> : null
             }
             {
-                (apiResults == "No results") ? <p>Sorry we didn´t find any routes...</p> : null
+                (apiResults == "No results") ? <p>Sorry we didn´t find any routes. Try mabey to adjust date and time.</p> : null
             }
         </>
     )

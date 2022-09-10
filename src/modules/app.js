@@ -10,6 +10,59 @@ import VoteForm from "../components/BookingForm/BookingForm";
 import Nav from "../components/Nav/Nav";
 
 export default function App() {
+    const from = [
+        {
+            id: "1",
+            harbor: "Egernsund"
+        },
+        {
+            id: "2",
+            harbor: "Marina Minde (Rendbjerg)",
+        },
+        {
+            id: "3",
+            harbor: "Brunsnæs",
+        },
+        {
+            id: "4",
+            harbor: "Langballigau",
+        },
+        {
+            id: "5",
+            harbor: "Flensborg",
+        },
+        {
+            id: "6",
+            harbor: "Sønderhav",
+        }
+    ]
+
+    const to = [
+        {
+            id: "2",
+            harbor: "Marina Minde (Rendbjerg)",
+        },
+        {
+            id: "3",
+            harbor: "Brunsnæs",
+        },
+        {
+            id: "4",
+            harbor: "Langballigau",
+        },
+        {
+            id: "5",
+            harbor: "Flensborg",
+        },
+        {
+            id: "6",
+            harbor: "Sønderhav",
+        },
+        {
+            id: "1",
+            harbor: "Egernsund"
+        }
+    ]
 
     return (
         <>
@@ -25,26 +78,7 @@ export default function App() {
                                 <a className="booking__navitem booking__navitem--selected" id="one-way">Enkelt</a>
                                 <a className="booking__navitem" id="event">Event</a>
                             </section>
-                            <VoteForm title="Stem på din favorit" from={
-                                [
-                                    "Egernsund",
-                                    "Marina Minde (Rendbjerg)",
-                                    "Brunsnæs",
-                                    "Langballigau",
-                                    "Flensborg",
-                                    "Sønderhav"
-                                ]}
-                                to={
-                                    [
-                                        "Marina Minde (Rendbjerg)",
-                                        "Brunsnæs",
-                                        "Langballigau",
-                                        "Flensborg",
-                                        "Sønderhav",
-                                        "Egernsund"
-                                    ]
-                                }
-                            />
+                            <VoteForm title="Stem på din favorit" from={from} to={to} />
                         </main>
                     </Route>
                     <Redirect to="/" />
