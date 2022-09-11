@@ -108,3 +108,12 @@ body{
     font-weight: bold;
     font-size: 16px;
 }
+
+.grid{
+    display: grid;
+}
+
+.gx2{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content;
+}

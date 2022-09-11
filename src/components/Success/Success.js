@@ -1,4 +1,5 @@
 const { useState } = React;
+import Payment from "../Payment/Payment";
 import "./Style/Success.css";
 export default function SuccessWindow(props) {
     
@@ -12,14 +13,10 @@ export default function SuccessWindow(props) {
     }
 
     const [popup, setPopUp] = useState(false);
-    function makePurchase(order) {
-        setPopUp(!popup);
-        console.log(order);
-    }
 
     const order = JSON.parse(props.order);
-    const fromHarbor = JSON.parse(order.harbor.from).harbor;
-    const toHarbor = JSON.parse(order.harbor.to).harbor;
+    const fromHarbor = order.harbor.from.harbor;
+    const toHarbor = order.harbor.to.harbor;
 
     return (
         <>
@@ -29,19 +26,24 @@ export default function SuccessWindow(props) {
                     <p>From: {props.values.fromharbor.harborName}</p>
                     <p>To: {props.values.toharbor.harborName}</p>
                     <p>Antal Personer: {props.values.passangerCount}</p>
-                    <p>Dato: { formatDate(new Date(props.values.dep)) }</p>
+                    <p>Dato: {formatDate(new Date(props.values.dep))}</p>
+                    <p>Pris: { props.values.price } kr.</p>
                     {(!!+props.values.cycle) ? <p>Inkl. cykel</p> : null}
-                    <button className="cta" onClick={ () =>  makePurchase(props.order) }>Køb ticket</button>
+                    <button className="cta" onClick={ () =>  setPopUp(!popup) }>Køb ticket</button>
                 </section>
             </article>
             {(popup) ? <article className="successWindow">
-                <section className="successWindow__content">
-                    <button className="" onClick={() => setPopUp(!popup)}>Close</button>
+                <button className="" onClick={() => setPopUp(!popup)}>Close</button>
+                <section className="successWindow__content grid gx2">
+                    <h2 className="order_Title">Order overview</h2>
                     <section className="orderOverview">
                         <p>Order nr.: {order.orderId}</p>
-                        <p>Dato: {order.orderDateTime}</p>
-                        <p>Fra: {fromHarbor} - til: {toHarbor }</p>
+                        <p>Fra: {fromHarbor}</p>
+                        <p>Til: {toHarbor}</p>
+                        <p>Dato: {formatDate(new Date(order.orderDateTime))}</p>
+                        <p>Pris: { props.values.price } kr.</p>
                     </section>
+                    <Payment order={order} payment={props.values.price} />
                 </section>
             </article> : null }
         </>

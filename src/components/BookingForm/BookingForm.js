@@ -6,8 +6,8 @@ import Order from "../../class/Order";
 export default function BookingForm(props) {
 
     const [first, setfirst] = useState(false);
-    const [fromHarbor, setFromHarbor] = useState("");
-    const [toHarbor, setToHarbor] = useState("");
+    const [fromHarbor, setFromHarbor] = useState({});
+    const [toHarbor, setToHarbor] = useState({});
     const [date, setDate] = useState("12.08.22 15:00");
     const [cycle, setCycle] = useState(false);
     const [passagener, setPassagner] = useState(1);
@@ -93,8 +93,8 @@ export default function BookingForm(props) {
         setIsLoading(true);
         setAPIresults("");
         setviewResult(false);
-        order.harbor.to = toHarbor;
-        order.harbor.from = fromHarbor;
+        order.harbor.to = JSON.parse(toHarbor);
+        order.harbor.from = JSON.parse(fromHarbor);
         order.orderDateTime = new Date(date);
         order.passangerCount = passagener;
         order.cycle.trueFalse = cycle;

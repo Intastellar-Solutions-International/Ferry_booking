@@ -1,0 +1,66 @@
+.cardNumber {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: grid;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    grid-template-columns: .33fr .33fr .33fr;
+}
+
+.cardNumber input[type=tel] {
+    border: none;
+    width: auto;
+    padding: 0;
+}
+
+.icon-container {
+    text-align: right;
+    font-size: 20px;
+    float: right;
+}
+
+.cards {
+    width: 50px;
+    height: 20px;
+    background-size: contain;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: saturate(0);
+}
+
+/* .cards.visa {
+    background-image: url(/checkout/assets/cards/visa_brand.svg);
+}
+
+.cards.visa {
+    background-image: url(/checkout/assets/cards/visa_brand.svg);
+} */
+
+.col-33 {
+    -ms-flex: 33%;
+    flex: 33%;
+    position: relative;
+}
+
+.creditCard-input{
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+}
+
+.order_Title{
+    grid-column: 1/3;
+}

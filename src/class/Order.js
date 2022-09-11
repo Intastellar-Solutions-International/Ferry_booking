@@ -12,8 +12,8 @@ export default class Order {
         this.orderPhone = Number;
         this.orderDateTime = Date;
         this.harbor = {
-            to: String,
-            from: String
+            to: Object,
+            from: Object
         };
         this.cycle = {
             trueFalse: Boolean,
@@ -24,5 +24,7 @@ export default class Order {
             firstName: String,
             lastName: String
         }
+        this.price = Number;
+        this.valuta = "DKK";
     }
 }
