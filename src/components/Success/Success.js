@@ -1,5 +1,6 @@
 const { useState } = React;
 import Payment from "../Payment/Payment";
+import Contact from "../Contact/Contact";
 import "./Style/Success.css";
 export default function SuccessWindow(props) {
     const [priceTag, setPriceTag] = useState();
@@ -53,7 +54,8 @@ export default function SuccessWindow(props) {
                         <p>Dato: {formatDate(new Date(order.orderDateTime))}</p>
                         <p>Pris: {priceTag} kr.</p>
                         <p>Antal Personer: { order.passangerCount }</p>
-                        {(!!+order.bicycle.trueFalse) ? <p>Inkl. { order.bicycle.type }</p> : null}
+                        {(!!+order.bicycle.trueFalse) ? <p>Inkl. {order.bicycle.type}</p> : null}
+                        <Contact />
                     </section>
                     <Payment order={order} payment={priceTag} />
                 </section>

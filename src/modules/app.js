@@ -6,7 +6,7 @@ const Prompt =  window.ReactRouterDOM.Prompt;
 const Switch = window.ReactRouterDOM.Switch;
 const Redirect = window.ReactRouterDOM.Redirect;
 
-import VoteForm from "../components/BookingForm/BookingForm";
+import BookingForm from "../components/BookingForm/BookingForm";
 import Nav from "../components/Nav/Nav";
 
 export default function App() {
@@ -74,11 +74,7 @@ export default function App() {
                 <Switch>
                     <Route path="/" exact>
                         <main className="content">
-                            <section className="booking__nav">
-                                <a className="booking__navitem booking__navitem--selected" id="one-way">Enkelt</a>
-                                <a className="booking__navitem" id="event">Event</a>
-                            </section>
-                            <VoteForm title="Stem på din favorit" from={from} to={to} />
+                            <BookingForm title="Stem på din favorit" from={from} to={to} />
                         </main>
                     </Route>
                     <Redirect to="/" />
