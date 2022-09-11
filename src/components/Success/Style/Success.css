@@ -9,7 +9,7 @@
 }
 
 .successWindow__content{
-    width: 700px;
+    width: 1000px;
     position: absolute;
     aspect-ratio: 16/9;
     background-color: rgb(255, 255, 255);

@@ -2,7 +2,7 @@ const { useState } = React;
 import Payment from "../Payment/Payment";
 import "./Style/Success.css";
 export default function SuccessWindow(props) {
-    
+    const [priceTag, setPriceTag] = useState();
     function formatDate(date) {
         var hours = date.getHours();
         var minutes = date.getMinutes();
@@ -17,8 +17,6 @@ export default function SuccessWindow(props) {
     const order = JSON.parse(props.order);
     const fromHarbor = order.harbor.from.harbor;
     const toHarbor = order.harbor.to.harbor;
-
-    console.log(props);
 
     return (
         <>
@@ -37,7 +35,7 @@ export default function SuccessWindow(props) {
                                         <p>Dato: {formatDate(new Date(searchResult.dep))}</p>
                                         <p>Pris: { searchResult.price } kr.</p>
                                         {(!!+searchResult.bicycle.yesNo) ? <p>Inkl. { searchResult.bicycle.type }</p> : null}
-                                        <button className="cta" onClick={ () =>  setPopUp(!popup) }>Køb ticket</button>
+                                        <button className="cta" onClick={() => { setPopUp(!popup); setPriceTag(searchResult.price); } }>Køb ticket</button>
                                     </article>
                                 </>
                             )
@@ -53,9 +51,11 @@ export default function SuccessWindow(props) {
                         <p>Fra: {fromHarbor}</p>
                         <p>Til: {toHarbor}</p>
                         <p>Dato: {formatDate(new Date(order.orderDateTime))}</p>
-                        <p>Pris: { props.values.price } kr.</p>
+                        <p>Pris: {priceTag} kr.</p>
+                        <p>Antal Personer: { order.passangerCount }</p>
+                        {(!!+order.bicycle.trueFalse) ? <p>Inkl. { order.bicycle.type }</p> : null}
                     </section>
-                    <Payment order={order} payment={props.values.price} />
+                    <Payment order={order} payment={priceTag} />
                 </section>
             </article> : null }
         </>
