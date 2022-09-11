@@ -92,8 +92,8 @@ export default function BookingForm(props) {
         order.harbor.from = JSON.parse(fromHarbor);
         order.orderDateTime = new Date(date);
         order.passangerCount = passagener;
-        order.cycle.trueFalse = cycle;
-        order.cycle.type = cycleType;
+        order.bicycle.trueFalse = cycle;
+        order.bicycle.type = cycleType;
 
         fetch("https://www.cykelfaergen.info/booking/test.php", {
             body: JSON.stringify(order),

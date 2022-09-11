@@ -15,7 +15,7 @@ export default class Order {
             to: Object,
             from: Object
         };
-        this.cycle = {
+        this.bicycle = {
             trueFalse: false,
             count: 0,
             type: "cycle"

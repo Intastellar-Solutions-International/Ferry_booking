@@ -36,7 +36,7 @@ export default function SuccessWindow(props) {
                                         <p>Antal Personer: {searchResult.passangerCount}</p>
                                         <p>Dato: {formatDate(new Date(searchResult.dep))}</p>
                                         <p>Pris: { searchResult.price } kr.</p>
-                                        {(!!+searchResult.cycle.yesNo) ? <p>Inkl. { searchResult.cycle.type }</p> : null}
+                                        {(!!+searchResult.bicycle.yesNo) ? <p>Inkl. { searchResult.bicycle.type }</p> : null}
                                         <button className="cta" onClick={ () =>  setPopUp(!popup) }>Køb ticket</button>
                                     </article>
                                 </>
