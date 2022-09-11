@@ -26,24 +26,24 @@ export default function Payment(props) {
                             <i class="cards visa" data-card-type="Visa"></i>
                             <i class="cards mastercard" data-card-type="Mastercard"></i>
                         </div>
-                        <input type="tel" className="creditCard-input" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" maxlength="19" />
+                        <input type="tel" className="creditCard-input" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" maxLength="19" />
                     </section>
                     <div class="row newCards">
                         <div class="col-33">
                             <label for="expmonth">Exp Month</label>
-                            <input type="tel" className="creditCard-input" id="expmonth" name="expmonth" placeholder="September" maxlength="2" />
+                            <input type="tel" className="creditCard-input" id="expmonth" name="expmonth" placeholder="September" maxLength="2" />
                         </div>
                         <div class="col-33">
                             <label for="expyear">Exp Year</label>
-                            <input type="tel" className="creditCard-input" id="expyear" name="expyear" placeholder="2018" maxlength="4" />
+                            <input type="tel" className="creditCard-input" id="expyear" name="expyear" placeholder="2018" maxLength="4" />
                         </div>
                         <div class="col-33">
                             <label for="cvv">CVV / CVC</label>
-                            <input type="tel" className="creditCard-input" id="cvv" name="cvv" placeholder="CVC" maxlength="3" />
+                            <input type="tel" className="creditCard-input" id="cvv" name="cvv" placeholder="CVC" maxLength="3" />
                         </div>
                     </div>
                 </section>
-                <button onClick={ (e) => continueToPayment() }>Pay</button>
+                <button className="payment_cta" onClick={ (e) => continueToPayment() }>Betal</button>
             </article>
         </>
     )

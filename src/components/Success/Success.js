@@ -28,7 +28,7 @@ export default function SuccessWindow(props) {
                     <p>Antal Personer: {props.values.passangerCount}</p>
                     <p>Dato: {formatDate(new Date(props.values.dep))}</p>
                     <p>Pris: { props.values.price } kr.</p>
-                    {(!!+props.values.cycle) ? <p>Inkl. cykel</p> : null}
+                    {(!!+props.values.cycle.yesNo) ? <p>Inkl. { props.values.cycle.type }</p> : null}
                     <button className="cta" onClick={ () =>  setPopUp(!popup) }>Køb ticket</button>
                 </section>
             </article>

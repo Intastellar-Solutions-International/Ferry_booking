@@ -5,11 +5,14 @@ import Order from "../../class/Order";
 
 export default function BookingForm(props) {
 
-    const [first, setfirst] = useState(false);
     const [fromHarbor, setFromHarbor] = useState({});
     const [toHarbor, setToHarbor] = useState({});
     const [date, setDate] = useState("12.08.22 15:00");
+    
     const [cycle, setCycle] = useState(false);
+
+    const [cycleType, setCycleType] = useState("cycle");
+
     const [passagener, setPassagner] = useState(1);
     const [disabled, setDisabled] = useState(true);
     const [viewResult, setviewResult] = useState(false);
@@ -80,14 +83,6 @@ export default function BookingForm(props) {
     const headers = {
         "ContentType":'application/json'
     };
-
-    const o = {
-        "fromHarbor": fromHarbor,
-        "toHarbor": toHarbor,
-        "date": date,
-        "passagener": passagener,
-        "cycle": cycle
-    }
     
     const searchItem = function () {
         setIsLoading(true);
@@ -98,6 +93,8 @@ export default function BookingForm(props) {
         order.orderDateTime = new Date(date);
         order.passangerCount = passagener;
         order.cycle.trueFalse = cycle;
+        order.cycle.type = cycleType;
+
         fetch("https://www.cykelfaergen.info/booking/test.php", {
             body: JSON.stringify(order),
             method: "post"
@@ -173,7 +170,11 @@ export default function BookingForm(props) {
                         <span className="booking__labelsize">Antal personer:</span>
                         <input type="tel" className="booking__input" value={passagener} placeholer="0" onChange={e => { setPassagner(e.target.value) }} />
                     </label>
-                    <input type="checkbox" id="cycle" name="cycle" onChange={e => { setCycle(!cycle) }} /> <label for="cycle">cykel</label>
+                    <section className="booking__advancedSettings">
+                        <input type="checkbox" id="cycle" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycle") }} /> <label for="cycle">cykel</label>
+                        <input type="checkbox" id="cycleWithTrailer" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithTrailer")  }} /> <label for="cycleWithTrailer">cykel med trailer</label>
+                        <input type="checkbox" id="cycleWithThreeWheel" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithThreeWheel") }} /> <label for="cycleWithThreeWheel">3 hjuls cykel</label>
+                    </section>
                     <button className="booking__submit" disabled={disabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
                 </form>
             </section>

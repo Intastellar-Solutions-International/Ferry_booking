@@ -16,10 +16,11 @@ export default class Order {
             from: Object
         };
         this.cycle = {
-            trueFalse: Boolean,
-            count: Number
+            trueFalse: false,
+            count: 0,
+            type: "cycle"
         };
-        this.passangerCount = Number;
+        this.passangerCount = 1;
         this.orderContactPerson = {
             firstName: String,
             lastName: String
