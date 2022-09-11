@@ -21,3 +21,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.result{
+    border: 4px solid #fff;
+    padding: 15px;
+}

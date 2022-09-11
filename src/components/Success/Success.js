@@ -18,26 +18,38 @@ export default function SuccessWindow(props) {
     const fromHarbor = order.harbor.from.harbor;
     const toHarbor = order.harbor.to.harbor;
 
+    console.log(props);
+
     return (
         <>
-            <article>
+            <section>
+                <h2>Tilgængelige afgange:</h2>
                 <section>
-                    <h2>Tilgængelige afgange:</h2>
-                    <p>From: {props.values.fromharbor.harborName}</p>
-                    <p>To: {props.values.toharbor.harborName}</p>
-                    <p>Antal Personer: {props.values.passangerCount}</p>
-                    <p>Dato: {formatDate(new Date(props.values.dep))}</p>
-                    <p>Pris: { props.values.price } kr.</p>
-                    {(!!+props.values.cycle.yesNo) ? <p>Inkl. { props.values.cycle.type }</p> : null}
-                    <button className="cta" onClick={ () =>  setPopUp(!popup) }>Køb ticket</button>
+                    {
+                        props?.values.map((item, key) => {
+                            const searchResult = JSON.parse(item);
+                            return (
+                                <>
+                                    <article key={key} className="result">
+                                        <p>From: {searchResult.fromharbor.harborName}</p>
+                                        <p>To: {searchResult.toharbor.harborName}</p>
+                                        <p>Antal Personer: {searchResult.passangerCount}</p>
+                                        <p>Dato: {formatDate(new Date(searchResult.dep))}</p>
+                                        <p>Pris: { searchResult.price } kr.</p>
+                                        {(!!+searchResult.cycle.yesNo) ? <p>Inkl. { searchResult.cycle.type }</p> : null}
+                                        <button className="cta" onClick={ () =>  setPopUp(!popup) }>Køb ticket</button>
+                                    </article>
+                                </>
+                            )
+                        })
+                    }
                 </section>
-            </article>
+            </section>
             {(popup) ? <article className="successWindow">
                 <button className="" onClick={() => setPopUp(!popup)}>Close</button>
                 <section className="successWindow__content grid gx2">
                     <h2 className="order_Title">Order overview</h2>
                     <section className="orderOverview">
-                        <p>Order nr.: {order.orderId}</p>
                         <p>Fra: {fromHarbor}</p>
                         <p>Til: {toHarbor}</p>
                         <p>Dato: {formatDate(new Date(order.orderDateTime))}</p>
