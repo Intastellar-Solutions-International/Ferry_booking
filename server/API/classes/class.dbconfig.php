@@ -1,10 +1,10 @@
 <?php
     class DBConfig {
 
-        public $database;
-        public $hostname;
-        public $username;
-        public $password;
+        public $database = "FerryBooking";
+        public $hostname = "127.0.0.1";
+        public $username = "root";
+        public $password = "";
         
         function __construct()
         {

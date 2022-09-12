@@ -14,10 +14,7 @@
         {
             $this->order = $order;
             $this->harborId = $order["harbor"]["from"]["id"];
-        }
 
-        /* Function to connect to db */
-        function Mysql() {
             $this -> connectionString = NULL;
             $this -> sqlQuery = NULL;
             $this -> dataSet = NULL;
@@ -25,16 +22,16 @@
             $dbPara = new DBConfig();
 
             $this -> databaseName = $dbPara->database;
-            $this -> hostName = $dbPara->hostname;
+            $this -> serverName = $dbPara->hostname;
             $this -> userName = $dbPara->username;
             $this -> passCode = $dbPara->password;
-
-            return $dbPara->database;
         }
+
+        /* Function to connect to db */
 
         function dbConnect(){
             $this -> connectionString = mysqli_connect($this -> serverName,$this -> userName,$this -> passCode);
-            mysqli_select_db($this -> databaseName,$this -> connectionString);
+            mysqli_select_db($this -> connectionString, $this -> databaseName);
             return $this -> connectionString;
         }
 
@@ -54,7 +51,19 @@
         /* Function to check for a free connection from users start harbor */
         function search(){
             $harbor = $this->harborId;
-            $s = "SELECT * FROM ... WHERE startHarbor=$harbor";
-            return $s;
+            $s = "SELECT * FROM bookings WHERE fromHarbor=$harbor";
+            $q = mysqli_query($this->dbConnect(), $s);
+
+            $num = mysqli_num_rows($q);
+
+            if(!$q) return $q; exit;
+            
+            if($num == 0) {
+                $a = $num;
+            }else{
+                $a = "No results";
+            }
+
+            return json_encode($a);
         }
     }
