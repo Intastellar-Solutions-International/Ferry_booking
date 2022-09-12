@@ -7,7 +7,7 @@ export default function BookingForm(props) {
 
     const [fromHarbor, setFromHarbor] = useState({});
     const [toHarbor, setToHarbor] = useState({});
-    const [date, setDate] = useState("12.08.22 15:00");
+    const [date, setDate] = useState("");
     
     const [cycle, setCycle] = useState(false);
 
@@ -15,6 +15,7 @@ export default function BookingForm(props) {
 
     const [passagener, setPassagner] = useState(1);
     const [disabled, setDisabled] = useState(true);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
     const [viewResult, setviewResult] = useState(false);
     const [apiResults, setAPIresults] = useState("");
 
@@ -102,6 +103,9 @@ export default function BookingForm(props) {
         setIsLoading(true);
         setAPIresults("");
         setviewResult(false);
+
+        if (toHarbor && Object.keys(toHarbor).length === 0 && Object.keys(fromHarbor).length > 0) { setIsLoading(false); setAPIresults("Please select a end harbor!"); return };
+
         order.harbor.to = JSON.parse(toHarbor);
         order.harbor.from = JSON.parse(fromHarbor);
         order.orderDateTime = new Date(date);
@@ -144,7 +148,7 @@ export default function BookingForm(props) {
                 <a className={"booking__navitem " + (changeBooking === "event" ? "booking__navitem--selected" : null)} onClick={ () => setChangeBooking("event") }>Event</a>
             </section>
             { (changeBooking == "single") ? <section className="booking__form">
-                <form className="booking" method="POST" onSubmit={(e) => { e.preventDefault(); searchItem() }}>
+                <form className="booking" method="POST" onChange={ () => setButtonDisabled(!buttonDisabled) } onSubmit={(e) => { e.preventDefault(); searchItem() }}>
                     <section className="booking__harbor">
                         <label className="booking__label booking__label--rightcircle" for="start">
                             <span className="booking__labelsize">Fra:</span>
@@ -194,10 +198,10 @@ export default function BookingForm(props) {
                         <input type="checkbox" id="cycleWithTrailer" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithTrailer")  }} /> <label for="cycleWithTrailer">cykel med trailer</label>
                         <input type="checkbox" id="cycleWithThreeWheel" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithThreeWheel") }} /> <label for="cycleWithThreeWheel">3 hjuls cykel</label>
                     </section>
-                    <button className="booking__submit" disabled={disabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
+                    <button className="booking__submit" disabled={buttonDisabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
                 </form>
             </section> : (changeBooking == "event") ? <section className="booking__form">
-                <form className="booking" method="POST" onSubmit={(e) => { e.preventDefault(); searchItem() }}>
+                <form className="booking" method="POST" onChange={ () => setButtonDisabled(!buttonDisabled) } onSubmit={(e) => { e.preventDefault(); searchItem() }}>
                     <section className="booking__harbor">
                         <label className="booking__label" for="start">
                             <span className="booking__labelsize">Fra:</span>
@@ -237,10 +241,10 @@ export default function BookingForm(props) {
                         <input type="checkbox" id="cycleWithTrailer" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithTrailer")  }} /> <label for="cycleWithTrailer">cykel med trailer</label>
                         <input type="checkbox" id="cycleWithThreeWheel" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithThreeWheel") }} /> <label for="cycleWithThreeWheel">3 hjuls cykel</label>
                     </section>
-                    <button className="booking__submit" disabled={disabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
+                    <button className="booking__submit" disabled={buttonDisabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
                 </form>
             </section> : <section className="booking__form">
-                <form className="booking" method="POST" onSubmit={(e) => { e.preventDefault(); searchItem() }}>
+                <form className="booking" method="POST" onChange={ () => setButtonDisabled(!buttonDisabled) } onSubmit={(e) => { e.preventDefault(); searchItem() }}>
                     <section className="booking__harbor">
                         <label className="booking__label booking__label--rightcircle" for="start">
                             <span className="booking__labelsize">Fra:</span>
@@ -290,7 +294,7 @@ export default function BookingForm(props) {
                         <input type="checkbox" id="cycleWithTrailer" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithTrailer")  }} /> <label for="cycleWithTrailer">cykel med trailer</label>
                         <input type="checkbox" id="cycleWithThreeWheel" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithThreeWheel") }} /> <label for="cycleWithThreeWheel">3 hjuls cykel</label>
                     </section>
-                    <button className="booking__submit" disabled={disabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
+                    <button className="booking__submit" disabled={buttonDisabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
                 </form>
             </section> }
             <section className="departures_Results">

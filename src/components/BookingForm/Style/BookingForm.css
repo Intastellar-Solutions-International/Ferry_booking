@@ -96,6 +96,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    cursor: pointer;
+}
+
+.booking__submit:disabled, .booking_submit[disabled]{
+    cursor: default;
+    background: #ffdf5d;
 }
 
 .departures_Results{
