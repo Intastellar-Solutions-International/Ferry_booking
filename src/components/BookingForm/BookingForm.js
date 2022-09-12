@@ -113,7 +113,7 @@ export default function BookingForm(props) {
         order.bicycle.trueFalse = cycle;
         order.bicycle.type = cycleType;
 
-        fetch("https://www.cykelfaergen.info/booking/test.php", {
+        fetch("http://0.0.0.0:3000/server/API.php", {
             body: JSON.stringify(order),
             method: "post"
         }).then(async (r) => r.json()).then((r) => {
