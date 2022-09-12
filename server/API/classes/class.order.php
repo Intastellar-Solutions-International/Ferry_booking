@@ -14,6 +14,7 @@
         {
             $this->order = $order;
             $this->harborId = $order["harbor"]["from"]["id"];
+            $this->departureTimeAndDate = $order["departureTimeAndDate"];
 
             $this -> connectionString = NULL;
             $this -> sqlQuery = NULL;
@@ -51,17 +52,19 @@
         /* Function to check for a free connection from users start harbor */
         function search(){
             $harbor = $this->harborId;
-            $s = "SELECT * FROM bookings WHERE fromHarbor=$harbor";
+            $departure = $this->departureTimeAndDate;
+
+            $s = "SELECT * FROM bookings WHERE fromHarborId = $harbor";
             $q = mysqli_query($this->dbConnect(), $s);
 
             $num = mysqli_num_rows($q);
-
-            if(!$q) return $q; exit;
+            
+            if(!$q) return json_encode("Server error! We couldn´t handle your request.");
             
             if($num == 0) {
                 $a = $num;
             }else{
-                $a = "No results";
+                $a = mysqli_fetch_all ($q, MYSQLI_ASSOC);
             }
 
             return json_encode($a);
