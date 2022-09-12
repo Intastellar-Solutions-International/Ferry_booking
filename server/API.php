@@ -3,10 +3,7 @@
     require("./API/classes/class.recommendations.php");
     require("./API/get.request.php");
 
-    $harbor = GetIncome()["harbor"];
+    /* Creating a new order */
+    $order = new Order(GetIncome());
 
-
-    $order = new Order();
-
-
-    print_r($harbor);
+    echo $order->search();

@@ -51,7 +51,7 @@ export default function SuccessWindow(props) {
                     <section className="orderOverview">
                         <p>Fra: {fromHarbor}</p>
                         <p>Til: {toHarbor}</p>
-                        <p>Dato: {formatDate(new Date(order.orderDateTime))}</p>
+                        <p>Dato: {formatDate(new Date(order.departureTimeAndDate))}</p>
                         <p>Pris: {priceTag} kr.</p>
                         <p>Antal Personer: { order.passangerCount }</p>
                         {(!!+order.bicycle.trueFalse) ? <p>Inkl. {order.bicycle.type}</p> : null}

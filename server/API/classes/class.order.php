@@ -10,9 +10,10 @@
         protected $userName;
         protected $password;
 
-        function __construct()
+        function __construct($order)
         {
-            
+            $this->order = $order;
+            $this->harborId = $order["harbor"]["from"]["id"];
         }
 
         /* Function to connect to db */
@@ -38,14 +39,22 @@
         }
 
         /* Function to insert a new order into db */
-        function add($order){
-            $i = "INSERT INTO orders() VALUES()";
+        function add(){
+            $order = $this->order;
+            /* Insert  */
+            $i = "INSERT INTO orders(fromHarbor, toHarbor, fromHarborId, toHarborId, passenger, cycle, departureTimeAndDate) VALUES()";
 
         }
 
-        /* Function to check if there is a free route */
-        function freeRoute(){
-
+        /* Function to calculate price both in EURO & DKK */
+        function calculate(){
+            
         }
 
+        /* Function to check for a free connection from users start harbor */
+        function search(){
+            $harbor = $this->harborId;
+            $s = "SELECT * FROM ... WHERE startHarbor=$harbor";
+            return $s;
+        }
     }

@@ -33,6 +33,7 @@ export default function BookingForm(props) {
     */
 
     function checkValue(v) {
+        console.log(v);
         v = JSON.parse(v).harbor;
         if (v == "Flensborg" || v == "Sønderhav") {
             removeFirst(props?.to, "Marina Minde (Rendbjerg)");
@@ -104,11 +105,9 @@ export default function BookingForm(props) {
         setAPIresults("");
         setviewResult(false);
 
-        if (toHarbor && Object.keys(toHarbor).length === 0 && Object.keys(fromHarbor).length > 0) { setIsLoading(false); setAPIresults("Please select a end harbor!"); return };
-
         order.harbor.to = JSON.parse(toHarbor);
         order.harbor.from = JSON.parse(fromHarbor);
-        order.orderDateTime = new Date(date);
+        order.departureTimeAndDate = new Date(date);
         order.passangerCount = passagener;
         order.bicycle.trueFalse = cycle;
         order.bicycle.type = cycleType;
@@ -153,7 +152,7 @@ export default function BookingForm(props) {
                         <label className="booking__label booking__label--rightcircle" for="start">
                             <span className="booking__labelsize">Fra:</span>
                             <select className="booking__input" id="start" defaultValue={"Start location"} onChange={e => {
-                                checkValue(e.target.value);
+                                /* checkValue(e.target.value); */
                                 setFromHarbor(e.target.value);
                                 if (e.target.value != "") {
                                     setDisabled(false);

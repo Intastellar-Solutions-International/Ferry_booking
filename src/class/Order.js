@@ -10,7 +10,7 @@ export default class Order {
             country: String
         };
         this.orderPhone = Number;
-        this.orderDateTime = Date;
+        this.departureTimeAndDate = Date;
         this.harbor = {
             to: Object,
             from: Object
