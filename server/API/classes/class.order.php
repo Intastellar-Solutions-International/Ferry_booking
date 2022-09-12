@@ -61,8 +61,8 @@
             
             if(!$q) return json_encode("Server error! We couldn´t handle your request.");
             
-            if($num == 0) {
-                $a = $num;
+            if($num > 0) {
+                $a = json_encode("No results");
             }else{
                 $a = mysqli_fetch_all ($q, MYSQLI_ASSOC);
             }

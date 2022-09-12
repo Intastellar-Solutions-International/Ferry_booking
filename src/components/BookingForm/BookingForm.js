@@ -118,9 +118,11 @@ export default function BookingForm(props) {
         }).then(async (r) => r.json()).then((r) => {
             setIsLoading(false);          
             setAPIresults(r);
+
             if (r != "No results") {
                 setviewResult(true);
             }
+
         }).catch(async (e) => {
             setIsLoading(false);
             setAPIresults(e);
