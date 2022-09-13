@@ -36,7 +36,7 @@ export default function SuccessWindow(props) {
                                         <p>To: {searchResult.toharbor.harborName}</p>
                                         <p>Antal Personer: {searchResult.passangerCount}</p>
                                         <p>Dato: {formatDate(new Date(searchResult.dep))}</p>
-                                        <p>Pris: { searchResult.price } kr.</p>
+                                        <p>Pris: {searchResult.price} { (order.valuta === "DKK") ? "kr." : "€" }</p>
                                         {(!!+searchResult.bicycle.yesNo) ? <p>Inkl. { searchResult.bicycle.type }</p> : null}
                                         <button className="cta" onClick={() => { setPopUp(!popup); setPriceTag(searchResult.price); } }>Køb ticket</button>
                                     </article>

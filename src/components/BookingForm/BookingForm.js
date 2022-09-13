@@ -8,6 +8,7 @@ export default function BookingForm(props) {
     const [fromHarbor, setFromHarbor] = useState({});
     const [toHarbor, setToHarbor] = useState({});
     const [date, setDate] = useState("");
+    const [currency, setCurrency] = useState("dkk");
     
     const [cycle, setCycle] = useState(false);
 
@@ -111,12 +112,12 @@ export default function BookingForm(props) {
         order.passangerCount = passagener;
         order.bicycle.trueFalse = cycle;
         order.bicycle.type = cycleType;
+        order.valuta = currency;
 
         fetch("http://0.0.0.0:3000/server/API.php", {
             body: JSON.stringify(order),
             method: "post"
         }).then(async (r) => r.json()).then((r) => {
-            console.log(typeof r, r);
             if (r != "") {
                 setIsLoading(false);          
                 setAPIresults(r);
@@ -124,7 +125,6 @@ export default function BookingForm(props) {
 
             if (r != "No results") {
                 setviewResult(true);
-                console.log(r);
             }
 
         }).catch(async (e) => {
@@ -153,7 +153,9 @@ export default function BookingForm(props) {
                 <a className={"booking__navitem " + (changeBooking === "event" ? "booking__navitem--selected" : null)} onClick={ () => setChangeBooking("event") }>Event</a>
             </section>
             { (changeBooking == "single") ? <section className="booking__form">
-                <form className="booking" method="POST" onChange={ () => setButtonDisabled(!buttonDisabled) } onSubmit={(e) => { e.preventDefault(); searchItem() }}>
+                <form className="booking" method="POST" onChange={() => setButtonDisabled(!buttonDisabled)} onSubmit={(e) => { e.preventDefault(); searchItem() }}>
+                    <input type="radio" name="currency" value="dkk" onChange={() => { setCurrency("DKK") }} /> Kroner
+                    <input type="radio" name="currency" value="euro" onChange={() => { setCurrency("EURO") }} /> Euro (€)
                     <section className="booking__harbor">
                         <label className="booking__label booking__label--rightcircle" for="start">
                             <span className="booking__labelsize">Fra:</span>
@@ -206,7 +208,9 @@ export default function BookingForm(props) {
                     <button className="booking__submit" disabled={buttonDisabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
                 </form>
             </section> : (changeBooking == "event") ? <section className="booking__form">
-                <form className="booking" method="POST" onChange={ () => setButtonDisabled(!buttonDisabled) } onSubmit={(e) => { e.preventDefault(); searchItem() }}>
+                <form className="booking" method="POST" onChange={() => setButtonDisabled(!buttonDisabled)} onSubmit={(e) => { e.preventDefault(); searchItem() }}>
+                    <input type="radio" name="currency" value="dkk" onChange={() => { setCurrency("DKK") }} /> Kroner
+                    <input type="radio" name="currency" value="euro" onChange={() => { setCurrency("EURO") }} /> Euro (€)
                     <section className="booking__harbor">
                         <label className="booking__label" for="start">
                             <span className="booking__labelsize">Fra:</span>
@@ -249,7 +253,9 @@ export default function BookingForm(props) {
                     <button className="booking__submit" disabled={buttonDisabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
                 </form>
             </section> : <section className="booking__form">
-                <form className="booking" method="POST" onChange={ () => setButtonDisabled(!buttonDisabled) } onSubmit={(e) => { e.preventDefault(); searchItem() }}>
+                <form className="booking" method="POST" onChange={() => setButtonDisabled(!buttonDisabled)} onSubmit={(e) => { e.preventDefault(); searchItem() }}>
+                    <input type="radio" name="currency" value="dkk" onChange={() => { setCurrency("DKK") }} /> Kroner
+                    <input type="radio" name="currency" value="euro" onChange={() => { setCurrency("EURO") }} /> Euro (€)
                     <section className="booking__harbor">
                         <label className="booking__label booking__label--rightcircle" for="start">
                             <span className="booking__labelsize">Fra:</span>

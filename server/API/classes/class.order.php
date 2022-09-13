@@ -16,6 +16,7 @@
             $this->harborId = $order["harbor"]["from"]["id"];
             $this->harbor = $order["harbor"]["from"]["harbor"];
             $this->departureTimeAndDate = $order["departureTimeAndDate"];
+            $this->valuta = $order["valuta"];
 
             $this -> connectionString = NULL;
             $this -> sqlQuery = NULL;
@@ -56,6 +57,8 @@
             $harbor = $this->harbor;
             $departure = $this->departureTimeAndDate;
 
+            $valuta = $this->valuta;
+
             $s = "SELECT * FROM bookings WHERE fromHarborId = $harborId";
             $q = mysqli_query($this->dbConnect(), $s);
 
@@ -95,7 +98,7 @@
                             ],
                             "dep" => "",
                             "passangerCount" => "",
-                            "price" => ""
+                            "price" => $row["price_" . strtolower($valuta)] 
                         )));
                     }
                     return json_encode($orderResults);
