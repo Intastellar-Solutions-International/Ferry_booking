@@ -119,7 +119,7 @@ export default function BookingForm(props) {
             setIsLoading(false);          
             setAPIresults(r);
 
-            if (r != "No results") {
+            if (r.indexOf("No results") === -1) {
                 setviewResult(true);
             }
 
@@ -306,7 +306,7 @@ export default function BookingForm(props) {
                     (viewResult && changeBooking != "event") ? <SuccessWindow values={apiResults} order={ JSON.stringify(order) } /> : null
                 }
                 {
-                    (apiResults == "No results") ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
+                    (apiResults && apiResults.indexOf("No results") === -1) ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
                 }
             </section>
         </>

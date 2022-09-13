@@ -19,13 +19,15 @@ export default function SuccessWindow(props) {
     const fromHarbor = order.harbor.from.harbor;
     const toHarbor = order.harbor.to.harbor;
 
+    console.log(props?.values);
+
     return (
         <>
             <section>
                 <h2>Tilgængelige afgange:</h2>
                 <section>
                     {
-                        props?.values.map((item, key) => {
+                        props?.values?.map((item, key) => {
                             const searchResult = JSON.parse(item);
                             return (
                                 <>

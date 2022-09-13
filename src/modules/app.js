@@ -74,7 +74,7 @@ export default function App() {
                 <Switch>
                     <Route path="/" exact>
                         <main className="content">
-                            <BookingForm title="Stem på din favorit" from={from} to={to} />
+                            <BookingForm from={from} to={to} />
                         </main>
                     </Route>
                     <Redirect to="/" />
