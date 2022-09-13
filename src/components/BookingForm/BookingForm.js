@@ -201,9 +201,9 @@ export default function BookingForm(props) {
                     </label>
                     <div style={{clear:"both"}}></div>
                     <section className="booking__advancedSettings">
-                        <input type="checkbox" id="cycle" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycle") }} /> <label for="cycle">cykel</label>
-                        <input type="checkbox" id="cycleWithTrailer" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithTrailer")  }} /> <label for="cycleWithTrailer">cykel med trailer</label>
-                        <input type="checkbox" id="cycleWithThreeWheel" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithThreeWheel") }} /> <label for="cycleWithThreeWheel">3 hjuls cykel</label>
+                        <input type="radio" id="cycle" name="cycle"  onChange={e => { setCycle(!cycle); setCycleType("cycle") }} /> <label for="cycle">cykel</label>
+                        <input type="radio" id="cycleWithTrailer" name="cycle"  onChange={e => { setCycle(!cycle); setCycleType("cycleWithTrailer")  }} /> <label for="cycleWithTrailer">cykel med trailer</label>
+                        <input type="radio" id="cycleWithThreeWheel" name="cycle"  onChange={e => { setCycle(!cycle); setCycleType("cycleWithThreeWheel") }} /> <label for="cycleWithThreeWheel">3 hjuls cykel</label>
                     </section>
                     <button className="booking__submit" disabled={buttonDisabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
                 </form>
@@ -246,9 +246,9 @@ export default function BookingForm(props) {
                     </label>
                     <div style={{clear:"both"}}></div>
                     <section className="booking__advancedSettings">
-                        <input type="checkbox" id="cycle" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycle") }} /> <label for="cycle">cykel</label>
-                        <input type="checkbox" id="cycleWithTrailer" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithTrailer")  }} /> <label for="cycleWithTrailer">cykel med trailer</label>
-                        <input type="checkbox" id="cycleWithThreeWheel" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithThreeWheel") }} /> <label for="cycleWithThreeWheel">3 hjuls cykel</label>
+                        <input type="radio" id="cycle" name="cycle"  onChange={e => { setCycle(!cycle); setCycleType("cycle") }} /> <label for="cycle">cykel</label>
+                        <input type="radio" id="cycleWithTrailer" name="cycle"  onChange={e => { setCycle(!cycle); setCycleType("cycleWithTrailer")  }} /> <label for="cycleWithTrailer">cykel med trailer</label>
+                        <input type="radio" id="cycleWithThreeWheel" name="cycle"  onChange={e => { setCycle(!cycle); setCycleType("cycleWithThreeWheel") }} /> <label for="cycleWithThreeWheel">3 hjuls cykel</label>
                     </section>
                     <button className="booking__submit" disabled={buttonDisabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
                 </form>
@@ -301,9 +301,9 @@ export default function BookingForm(props) {
                     </label>
                     <div style={{clear:"both"}}></div>
                     <section className="booking__advancedSettings">
-                        <input type="checkbox" id="cycle" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycle") }} /> <label for="cycle">cykel</label>
-                        <input type="checkbox" id="cycleWithTrailer" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithTrailer")  }} /> <label for="cycleWithTrailer">cykel med trailer</label>
-                        <input type="checkbox" id="cycleWithThreeWheel" name="cycle" onChange={e => { setCycle(!cycle); setCycleType("cycleWithThreeWheel") }} /> <label for="cycleWithThreeWheel">3 hjuls cykel</label>
+                        <input type="radio" id="cycle" name="cycle"  onChange={e => { setCycle(!cycle); setCycleType("cycle") }} /> <label for="cycle">cykel</label>
+                        <input type="radio" id="cycleWithTrailer" name="cycle"  onChange={e => { setCycle(!cycle); setCycleType("cycleWithTrailer")  }} /> <label for="cycleWithTrailer">cykel med trailer</label>
+                        <input type="radio" id="cycleWithThreeWheel" name="cycle"  onChange={e => { setCycle(!cycle); setCycleType("cycleWithThreeWheel") }} /> <label for="cycleWithThreeWheel">3 hjuls cykel</label>
                     </section>
                     <button className="booking__submit" disabled={buttonDisabled} type="submit">{(isLoading) ? "Vi søger lige en rute frem..." : "Søg færge afgang"}</button>
                 </form>
