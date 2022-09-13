@@ -116,11 +116,15 @@ export default function BookingForm(props) {
             body: JSON.stringify(order),
             method: "post"
         }).then(async (r) => r.json()).then((r) => {
-            setIsLoading(false);          
-            setAPIresults(r);
+            console.log(typeof r, r);
+            if (r != "") {
+                setIsLoading(false);          
+                setAPIresults(r);
+            }
 
-            if (r.indexOf("No results") === -1) {
+            if (r != "No results") {
                 setviewResult(true);
+                console.log(r);
             }
 
         }).catch(async (e) => {
@@ -128,8 +132,6 @@ export default function BookingForm(props) {
             setAPIresults(e);
         })
     }
-
-    console.log(apiResults);
 
     
     const change = document.querySelectorAll(".change");
@@ -302,13 +304,13 @@ export default function BookingForm(props) {
             </section> }
             <section className="departures_Results">
                 {
-                    (isLoading) ? <p className="searchBar">Searching a ferry connection for you <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></p> : null
+                    (isLoading) ? <p className="searchBar">Searching a ferry connection for you <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div></p> : null
                 }
                 {
                     (viewResult && changeBooking != "event" && Array.isArray(apiResults) && apiResults.length > 0 || typeof apiResults === "object") ? <SuccessWindow values={apiResults} order={ JSON.stringify(order) } /> : null
                 }
                 {
-                    (apiResults && Array.isArray(apiResults) && apiResults.indexOf("No results") === -1) ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
+                    (apiResults && typeof apiResults === "string" && apiResults == "No results") ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
                 }
             </section>
         </>

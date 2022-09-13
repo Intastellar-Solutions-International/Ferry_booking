@@ -10,6 +10,8 @@ export default function SuccessWindow(props) {
         hours = hours;
         minutes = minutes < 10 ? '0'+minutes : minutes;
         var strTime = hours + ':' + minutes;
+
+        if(isNaN(date)){return "No valid date!"}
         return (date.getDay()) + "." + (date.getMonth()+1) + " " + date.getFullYear() + "  " + strTime;
     }
 
@@ -26,8 +28,7 @@ export default function SuccessWindow(props) {
                 <section>
                     {
                         props?.values?.map((item, key) => {
-                            const searchResult = item;
-
+                            const searchResult = JSON.parse(item);
                             return (
                                 <>
                                     <article key={key} className="result">
