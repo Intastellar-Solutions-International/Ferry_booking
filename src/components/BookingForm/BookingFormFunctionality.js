@@ -154,7 +154,50 @@ export default function BookingForm(props) {
                 <a className={"booking__navitem " + (changeBooking === "single" ? "booking__navitem--selected" : null)} onClick={ () => setChangeBooking("single") }>Enkelt</a>
                 <a className={"booking__navitem " + (changeBooking === "event" ? "booking__navitem--selected" : null)} onClick={ () => setChangeBooking("event") }>Event</a>
             </section>
-            { (changeBooking == "single") ? <SingleRouteForm /> : (changeBooking == "event") ? <EventRouteForm /> : <SingleRouteForm /> }
+            {(changeBooking == "single") ? <SingleRouteForm
+                setFromHarbor={setFromHarbor}
+                setToHarbor={setToHarbor}
+                setDate={setDate}
+                setCurrency={setCurrency}
+                setCycle={setCycle}
+                setCycleType={setCycleType}
+                setPassagner={setPassagner}
+                setDisabled={setDisabled}
+                disabled={disabled}
+                date={date}
+                passagener={passagener}
+                setButtonDisabled={setButtonDisabled} /> : (changeBooking == "event") ?
+                <EventRouteForm
+                    setFromHarbor={setFromHarbor}
+                    setToHarbor={setToHarbor}
+                    setDate={setDate}
+                    setCurrency={setCurrency}
+                    setCycle={setCycle}
+                    setCycleType={setCycleType}
+                    setPassagner={setPassagner}
+                    setDisabled={setDisabled}
+                    disabled={disabled}
+                    date={date}
+                    passagener={passagener}
+                    setButtonDisabled={setButtonDisabled}
+                    buttonDisabled={buttonDisabled}
+                    isLoading={isLoading}
+                /> :
+                <SingleRouteForm
+                    setFromHarbor={setFromHarbor}
+                    setToHarbor={setToHarbor}
+                    setDate={setDate}
+                    setCurrency={setCurrency}
+                    setCycle={setCycle}
+                    setCycleType={setCycleType}
+                    setPassagner={setPassagner}
+                    setDisabled={setDisabled}
+                    disabled={disabled}
+                    date={date}
+                    passagener={passagener}
+                    setButtonDisabled={setButtonDisabled}
+                    isLoading={isLoading}
+                />}
             <section className="departures_Results">
                 {
                     (isLoading) ? <p className="searchBar">Searching a ferry connection for you <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div></p> : null

@@ -1,4 +1,12 @@
-export default function EventRouteForm() {
+export default function EventRouteForm(props) {
+    const setDisabled = props.setDisabled;
+    const setButtonDisabled = props.setButtonDisabled;
+
+    const disabled = props.disabled;
+    const date = props.date;
+    const passagener = props.passagener;
+    const buttonDisabled = props.buttonDisabled;
+    const isLoading = props.isLoading;
     return (
         <>
             <section className="booking__form">
