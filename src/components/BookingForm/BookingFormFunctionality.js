@@ -165,8 +165,12 @@ export default function BookingForm(props) {
                 setDisabled={setDisabled}
                 disabled={disabled}
                 date={date}
+                checkValue={checkValue}
                 passagener={passagener}
-                setButtonDisabled={setButtonDisabled} /> : (changeBooking == "event") ?
+                isLoading={isLoading}
+                setButtonDisabled={setButtonDisabled}
+                to={props.to}
+                from={props.from} /> : (changeBooking == "event") ?
                 <EventRouteForm
                     setFromHarbor={setFromHarbor}
                     setToHarbor={setToHarbor}
@@ -182,6 +186,8 @@ export default function BookingForm(props) {
                     setButtonDisabled={setButtonDisabled}
                     buttonDisabled={buttonDisabled}
                     isLoading={isLoading}
+                    to={props.to}
+                    from={props.from}
                 /> :
                 <SingleRouteForm
                     setFromHarbor={setFromHarbor}
@@ -189,6 +195,7 @@ export default function BookingForm(props) {
                     setDate={setDate}
                     setCurrency={setCurrency}
                     setCycle={setCycle}
+                    checkValue={checkValue}
                     setCycleType={setCycleType}
                     setPassagner={setPassagner}
                     setDisabled={setDisabled}
@@ -197,6 +204,8 @@ export default function BookingForm(props) {
                     passagener={passagener}
                     setButtonDisabled={setButtonDisabled}
                     isLoading={isLoading}
+                    to={props.to}
+                    from={props.from}
                 />}
             <section className="departures_Results">
                 {

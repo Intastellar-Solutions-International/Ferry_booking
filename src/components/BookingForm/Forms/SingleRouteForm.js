@@ -7,6 +7,7 @@ export default function SingleRouteForm(props) {
     const passagener = props.passagener;
     const buttonDisabled = props.buttonDisabled;
     const isLoading = props.isLoading;
+    const checkValue = props.checkValue;
     return (
         <>
             <section className="booking__form">
@@ -17,7 +18,7 @@ export default function SingleRouteForm(props) {
                         <label className="booking__label booking__label--rightcircle" for="start">
                             <span className="booking__labelsize">Fra:</span>
                             <select className="booking__input" id="start" defaultValue={"Start location"} onChange={e => {
-                                /* checkValue(e.target.value); */
+                                checkValue(e.target.value);
                                 setFromHarbor(e.target.value);
                                 if (e.target.value != "") {
                                     setDisabled(false);
