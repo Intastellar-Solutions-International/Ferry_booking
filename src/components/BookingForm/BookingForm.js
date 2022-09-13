@@ -154,8 +154,8 @@ export default function BookingForm(props) {
             </section>
             { (changeBooking == "single") ? <section className="booking__form">
                 <form className="booking" method="POST" onChange={() => setButtonDisabled(!buttonDisabled)} onSubmit={(e) => { e.preventDefault(); searchItem() }}>
-                    <input type="radio" name="currency" value="dkk" onChange={() => { setCurrency("DKK") }} /> Kroner
-                    <input type="radio" name="currency" value="euro" onChange={() => { setCurrency("EURO") }} /> Euro (€)
+                    <input type="radio" id="dkk" name="currency" value="dkk" onChange={() => { setCurrency("DKK") }} /> <label for="dkk">Kroner</label>
+                    <input type="radio" id="euro" name="currency" value="euro" onChange={() => { setCurrency("EURO") }} /> <label for="euro">Euro (€)</label>
                     <section className="booking__harbor">
                         <label className="booking__label booking__label--rightcircle" for="start">
                             <span className="booking__labelsize">Fra:</span>
@@ -209,8 +209,8 @@ export default function BookingForm(props) {
                 </form>
             </section> : (changeBooking == "event") ? <section className="booking__form">
                 <form className="booking" method="POST" onChange={() => setButtonDisabled(!buttonDisabled)} onSubmit={(e) => { e.preventDefault(); searchItem() }}>
-                    <input type="radio" name="currency" value="dkk" onChange={() => { setCurrency("DKK") }} /> Kroner
-                    <input type="radio" name="currency" value="euro" onChange={() => { setCurrency("EURO") }} /> Euro (€)
+                    <input type="radio" id="dkk" name="currency" value="dkk" onChange={() => { setCurrency("DKK") }} /> <label for="dkk">Kroner</label>
+                    <input type="radio" id="euro" name="currency" value="euro" onChange={() => { setCurrency("EURO") }} /> <label for="euro">Euro (€)</label>
                     <section className="booking__harbor">
                         <label className="booking__label" for="start">
                             <span className="booking__labelsize">Fra:</span>
@@ -254,8 +254,8 @@ export default function BookingForm(props) {
                 </form>
             </section> : <section className="booking__form">
                 <form className="booking" method="POST" onChange={() => setButtonDisabled(!buttonDisabled)} onSubmit={(e) => { e.preventDefault(); searchItem() }}>
-                    <input type="radio" name="currency" value="dkk" onChange={() => { setCurrency("DKK") }} /> Kroner
-                    <input type="radio" name="currency" value="euro" onChange={() => { setCurrency("EURO") }} /> Euro (€)
+                    <input type="radio" id="dkk" name="currency" value="dkk" onChange={() => { setCurrency("DKK") }} /> <label for="dkk">Kroner</label>
+                    <input type="radio" id="euro" name="currency" value="euro" onChange={() => { setCurrency("EURO") }} /> <label for="euro">Euro (€)</label>
                     <section className="booking__harbor">
                         <label className="booking__label booking__label--rightcircle" for="start">
                             <span className="booking__labelsize">Fra:</span>
