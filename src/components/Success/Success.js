@@ -19,8 +19,6 @@ export default function SuccessWindow(props) {
     const fromHarbor = order.harbor.from.harbor;
     const toHarbor = order.harbor.to.harbor;
 
-    console.log(props?.values);
-
     return (
         <>
             <section>
@@ -28,7 +26,8 @@ export default function SuccessWindow(props) {
                 <section>
                     {
                         props?.values?.map((item, key) => {
-                            const searchResult = JSON.parse(item);
+                            const searchResult = item;
+
                             return (
                                 <>
                                     <article key={key} className="result">

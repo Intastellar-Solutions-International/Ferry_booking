@@ -14,6 +14,7 @@
         {
             $this->order = $order;
             $this->harborId = $order["harbor"]["from"]["id"];
+            $this->harbor = $order["harbor"]["from"]["harbor"];
             $this->departureTimeAndDate = $order["departureTimeAndDate"];
 
             $this -> connectionString = NULL;
@@ -51,10 +52,11 @@
 
         /* Function to check for a free connection from users start harbor */
         function search(){
-            $harbor = $this->harborId;
+            $harborId = $this->harborId;
+            $harbor = $this->harbor;
             $departure = $this->departureTimeAndDate;
 
-            $s = "SELECT * FROM bookings WHERE fromHarborId = $harbor";
+            $s = "SELECT * FROM bookings WHERE fromHarborId = $harborId";
             $q = mysqli_query($this->dbConnect(), $s);
 
             $num = mysqli_num_rows($q);
@@ -64,7 +66,40 @@
             if($num > 0) {
                 $a = json_encode("No results");
             }else{
-                $a = mysqli_fetch_all ($q, MYSQLI_ASSOC);
+                $sql = "SELECT * FROM tickets WHERE start_harbor = '$harbor'";
+                $q = mysqli_query($this->dbConnect(), $sql);
+
+                if(!$q) return json_encode("Server error! We couldn´t handle your request.");
+
+                $num = mysqli_num_rows($q);
+                if($num === 0){
+                    $a = json_encode("No results");
+                }else{
+                    $orderResults = [];
+                    foreach(mysqli_fetch_all ($q, MYSQLI_ASSOC) as $row)
+                    {   
+                        array_push($orderResults,json_encode(array(
+                            "toharbor" => [
+                                "harborName" => $row["destination"],
+                                "long" => "",
+                                "lat" => ""
+                            ],
+                            "fromharbor" => [
+                                "harborName" => $row["start_harbor"],
+                                "long" => "",
+                                "lat" => ""
+                            ],
+                            "bicycle" => [
+                                "yesNo" => false,
+                                "type" => ""
+                            ],
+                            "dep" => "",
+                            "passangerCount" => "",
+                            "price" => ""
+                        )));
+                    }
+                    return json_encode($orderResults);
+                }
             }
 
             return json_encode($a);

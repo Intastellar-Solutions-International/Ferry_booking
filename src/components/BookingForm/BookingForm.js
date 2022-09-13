@@ -129,6 +129,8 @@ export default function BookingForm(props) {
         })
     }
 
+    console.log(apiResults);
+
     
     const change = document.querySelectorAll(".change");
     for(let i=0; i<change.length; i++){
@@ -300,13 +302,13 @@ export default function BookingForm(props) {
             </section> }
             <section className="departures_Results">
                 {
-                    (isLoading) ? "We are searching..." : null
+                    (isLoading) ? <p className="searchBar">Searching a ferry connection for you <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></p> : null
                 }
                 {
-                    (viewResult && changeBooking != "event") ? <SuccessWindow values={apiResults} order={ JSON.stringify(order) } /> : null
+                    (viewResult && changeBooking != "event" && Array.isArray(apiResults) && apiResults.length > 0 || typeof apiResults === "object") ? <SuccessWindow values={apiResults} order={ JSON.stringify(order) } /> : null
                 }
                 {
-                    (apiResults && apiResults.indexOf("No results") === -1) ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
+                    (apiResults && Array.isArray(apiResults) && apiResults.indexOf("No results") === -1) ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
                 }
             </section>
         </>
