@@ -6,7 +6,7 @@ const Prompt =  window.ReactRouterDOM.Prompt;
 const Switch = window.ReactRouterDOM.Switch;
 const Redirect = window.ReactRouterDOM.Redirect;
 
-import BookingForm from "../components/BookingForm/BookingForm";
+import BookingForm from "../components/BookingForm/BookingFormFunctionality";
 import Nav from "../components/Nav/Nav";
 
 export default function App() {
