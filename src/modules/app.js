@@ -10,6 +10,7 @@ import BookingForm from "../components/BookingForm/BookingFormFunctionality";
 import Nav from "../components/Nav/Nav";
 
 export default function App() {
+    const shipsId = 1;
     const from = [
         {
             id: "1",
@@ -74,7 +75,7 @@ export default function App() {
                 <Switch>
                     <Route path="/" exact>
                         <main className="content">
-                            <BookingForm from={from} to={to} />
+                            <BookingForm from={from} to={to} shipsId={shipsId} />
                         </main>
                     </Route>
                     <Redirect to="/" />

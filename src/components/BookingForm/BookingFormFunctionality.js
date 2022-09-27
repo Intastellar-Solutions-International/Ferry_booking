@@ -4,13 +4,14 @@ import EventRouteForm from "./Forms/EventRouteForm";
 import SuccessWindow from "../Success/Success";
 const { useState, useSWR } = React;
 import Order from "../../class/Order";
+import LoadingBar from "../LoadingBar/LoadingBar";
 
 export default function BookingForm(props) {
 
     const [fromHarbor, setFromHarbor] = useState({});
     const [toHarbor, setToHarbor] = useState({});
     const [date, setDate] = useState("");
-    const [currency, setCurrency] = useState("dkk");
+    const [currency, setCurrency] = useState("DKK");
     
     const [cycle, setCycle] = useState(false);
 
@@ -26,6 +27,8 @@ export default function BookingForm(props) {
 
     const [changeBooking, setChangeBooking] = useState("single");
 
+    const shipsId = props.shipsId;
+
     /* 
         "Egernsund",
         "Marina Minde (Rendbjerg)",
@@ -36,7 +39,6 @@ export default function BookingForm(props) {
     */
 
     function checkValue(v) {
-        console.log(v);
         v = JSON.parse(v).harbor;
         if (v == "Flensborg" || v == "Sønderhav") {
             removeFirst(props?.to, "Marina Minde (Rendbjerg)");
@@ -104,6 +106,7 @@ export default function BookingForm(props) {
     };
     
     const searchItem = function () {
+        
         setIsLoading(true);
         setAPIresults("");
         setviewResult(false);
@@ -116,7 +119,7 @@ export default function BookingForm(props) {
         order.bicycle.type = cycleType;
         order.valuta = currency;
 
-        fetch("http://0.0.0.0:3000/server/API.php", {
+        fetch("http://0.0.0.0:3000/server/API/checkBookings.php", {
             body: JSON.stringify(order),
             method: "post"
         }).then(async (r) => r.json()).then((r) => {
@@ -151,8 +154,8 @@ export default function BookingForm(props) {
     return (
         <>
             <section className="booking__nav">
-                <a className={"booking__navitem " + (changeBooking === "single" ? "booking__navitem--selected" : null)} onClick={ () => setChangeBooking("single") }>Enkelt</a>
-                <a className={"booking__navitem " + (changeBooking === "event" ? "booking__navitem--selected" : null)} onClick={ () => setChangeBooking("event") }>Event</a>
+                <button className={"booking__navitem " + (changeBooking === "single" ? "booking__navitem--selected" : "")} onClick={ () => setChangeBooking("single") }>Enkelt</button>
+                <button className={"booking__navitem " + (changeBooking === "event" ? "booking__navitem--selected" : "")} onClick={ () => setChangeBooking("event") }>Event</button>
             </section>
             {(changeBooking == "single") ? <SingleRouteForm
                 setFromHarbor={setFromHarbor}
@@ -164,13 +167,16 @@ export default function BookingForm(props) {
                 setPassagner={setPassagner}
                 setDisabled={setDisabled}
                 disabled={disabled}
+                currency={currency}
                 date={date}
+                searchItem={searchItem}
                 checkValue={checkValue}
                 passagener={passagener}
                 isLoading={isLoading}
                 setButtonDisabled={setButtonDisabled}
                 to={props.to}
-                from={props.from} /> : (changeBooking == "event") ?
+                from={props.from}
+                shipsId={shipsId} /> : (changeBooking == "event") ?
                 <EventRouteForm
                     setFromHarbor={setFromHarbor}
                     setToHarbor={setToHarbor}
@@ -181,6 +187,8 @@ export default function BookingForm(props) {
                     setPassagner={setPassagner}
                     setDisabled={setDisabled}
                     disabled={disabled}
+                    currency={currency}
+                    searchItem={searchItem}
                     date={date}
                     passagener={passagener}
                     setButtonDisabled={setButtonDisabled}
@@ -188,6 +196,7 @@ export default function BookingForm(props) {
                     isLoading={isLoading}
                     to={props.to}
                     from={props.from}
+                    shipsId={shipsId}
                 /> :
                 <SingleRouteForm
                     setFromHarbor={setFromHarbor}
@@ -196,20 +205,23 @@ export default function BookingForm(props) {
                     setCurrency={setCurrency}
                     setCycle={setCycle}
                     checkValue={checkValue}
+                    searchItem={searchItem}
                     setCycleType={setCycleType}
                     setPassagner={setPassagner}
                     setDisabled={setDisabled}
                     disabled={disabled}
+                    currency={currency}
                     date={date}
                     passagener={passagener}
                     setButtonDisabled={setButtonDisabled}
                     isLoading={isLoading}
                     to={props.to}
                     from={props.from}
+                    shipsId={shipsId}
                 />}
             <section className="departures_Results">
                 {
-                    (isLoading) ? <p className="searchBar">Searching a ferry connection for you <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div></p> : null
+                    (isLoading) ? <p className="searchBar">Searching a ferry connection for you <LoadingBar /></p> : null
                 }
                 {
                     (viewResult && changeBooking != "event" && Array.isArray(apiResults) && apiResults.length > 0 || typeof apiResults === "object") ? <SuccessWindow values={apiResults} order={ JSON.stringify(order) } /> : null

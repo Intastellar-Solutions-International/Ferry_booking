@@ -6,6 +6,6 @@ CREATE TABLE [dbo].[orders]
   [fromHarborId] int(11) NOT NULL,
   [toHarborId] int(11) NOT NULL,
   [passenger] varchar(11) NOT NULL,
-  [cycle] int(11) NOT NULL,
-  [departureTimeAndDate] int(11) NOT NULL
+  [cycle] int(2) NOT NULL,
+  [departureTimeAndDate] DATETIME NOT NULL
 )

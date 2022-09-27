@@ -1,11 +1,31 @@
+:root{
+    --defaultBackgroundColor: #fff;
+    --defaultFontColor: rgb(24, 24, 24);
+}
+
+@media (prefers-color-scheme: light) {
+    :root{
+        --defaultBackgroundColor: #fff;
+        --defaultFontColor: rgb(50, 50, 50);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root{
+        --defaultBackgroundColor: rgb(21, 21, 21);
+        --defaultFontColor: rgb(190, 190, 190);
+    }
+}
+
 *{
     box-sizing: border-box;
 }
+
 body{
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(21, 21, 21);
-    color: rgb(190, 190, 190);
+    background-color: var(--defaultBackgroundColor);
+    color: var(--defaultFontColor);
 }
 
 .main-header{
@@ -20,13 +40,14 @@ body{
     padding: 15px;
     color: rgb(190, 190, 190);
     text-decoration: none;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
 }
 
 .content{
     width: 80%;
     margin: auto;
+    margin-top: 40px;
 }
 
 .booking__nav {
@@ -53,6 +74,8 @@ body{
     border-top-left-radius: 10px;
     -webkit-border-top-left-radius: 10px;
     -moz-border-top-left-radius: 10px;
+
+    border: none;
 }
 .booking__navitem--selected {
     background: #046b6dc2;
