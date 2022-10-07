@@ -16,5 +16,10 @@
             );
         }
 
+        function DB(){
+            $this -> connectionString = mysqli_connect($this -> hostname,$this -> username,$this -> password);
+            mysqli_select_db($this -> connectionString, $this -> database);
+            return $this -> connectionString;
+        }
 
     }

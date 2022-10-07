@@ -1,5 +1,10 @@
+const { useState, useSWR, useEffect, useRef } = React;
 import LoadingBar from "../../LoadingBar/LoadingBar";
 export default function SingleRouteForm(props) {
+
+    const bookingLabel = useRef();
+    const [LeftOfArrows, setLeftOfArrows] = useState();
+
     const setDisabled = props.setDisabled;
     const setButtonDisabled = props.setButtonDisabled;
 
@@ -10,6 +15,9 @@ export default function SingleRouteForm(props) {
     const isLoading = props.isLoading;
     const checkValue = props.checkValue;
     const shipsId = props.shipsId;
+    
+    const width = bookingLabel.current;
+    /* setLeftOfArrows(width); */
 
     return (
         <>
@@ -18,13 +26,14 @@ export default function SingleRouteForm(props) {
                     <input type="radio" id="dkk" name="currency" checked={(props.currency === "DKK") ? true : false} value="dkk" onChange={() => { props.setCurrency("DKK") }} /> <label for="dkk">Kroner</label>
                     <input type="radio" id="euro" name="currency" checked={(props.urrency === "EURO") ? true : false} value="euro" onChange={() => { props.setCurrency("EURO") }} /> <label for="euro">Euro (€)</label>
                     <section className="booking__harbor">
-                        <label className="booking__label booking__label--rightcircle" for="start">
+                        <label className="booking__label booking__label--rightcircle" ref={bookingLabel} for="start">
                             <span className="booking__labelsize">Fra:</span>
                             <select className="booking__input" id="start" defaultValue={"Start location"} onChange={e => {
                                 props.checkValue(e.target.value);
                                 props.setFromHarbor(e.target.value);
                                 if (e.target.value != "") {
                                     props.setDisabled(false);
+                                    
                                 }
                             }}>
                                 <option value={"Start location"} disabled>Vælg havn</option>
@@ -37,10 +46,10 @@ export default function SingleRouteForm(props) {
                                 }
                             </select>
                         </label>
-                        <span className="material-icons change"></span>
+                        <span className="material-icons change" style={{ left: LeftOfArrows + "px"}}></span>
                         <label className="booking__label booking__label--indent booking__label--leftcircle" for="end">
                             <span className="booking__labelsize">Til:</span>
-                            <select className="booking__input" id="end" disabled={disabled} defaultValue="End location" onChange={e => { setToHarbor(e.target.value) }}>
+                            <select className="booking__input" id="end" disabled={disabled} defaultValue="End location" onChange={e => { props.setToHarbor(e.target.value) }}>
                                 <option value={"End location"} disabled>Vælg havn</option>
                                 {
                                     props?.to?.map((item, key) => {

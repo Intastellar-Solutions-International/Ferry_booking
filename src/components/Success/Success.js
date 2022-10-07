@@ -3,6 +3,9 @@ import Payment from "../Payment/Payment";
 import Contact from "../Contact/Contact";
 import "./Style/Success.css";
 export default function SuccessWindow(props) {
+
+    console.log(props.values);
+
     const [priceTag, setPriceTag] = useState();
     function formatDate(date) {
         var hours = date.getHours();

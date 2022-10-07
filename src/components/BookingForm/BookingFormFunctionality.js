@@ -2,7 +2,7 @@ import "./Style/BookingForm.css";
 import SingleRouteForm from "./Forms/SingleRouteForm";
 import EventRouteForm from "./Forms/EventRouteForm";
 import SuccessWindow from "../Success/Success";
-const { useState, useSWR } = React;
+const { useState, useSWR, useEffect } = React;
 import Order from "../../class/Order";
 import LoadingBar from "../LoadingBar/LoadingBar";
 
@@ -22,10 +22,11 @@ export default function BookingForm(props) {
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [viewResult, setviewResult] = useState(false);
     const [apiResults, setAPIresults] = useState("");
+    const [errorMessage, setErrorMessage] = useState();
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const [changeBooking, setChangeBooking] = useState("single");
+    const [changeBooking, setChangeBooking] = useState();
 
     const shipsId = props.shipsId;
 
@@ -37,7 +38,7 @@ export default function BookingForm(props) {
         "Flensborg",
         "Sønderhav"
     */
-
+    
     function checkValue(v) {
         v = JSON.parse(v).harbor;
         if (v == "Flensborg" || v == "Sønderhav") {
@@ -59,7 +60,8 @@ export default function BookingForm(props) {
         } else if (v == "Egernsund") {
 
             props?.to.find(obj => {
-                if (obj?.harbor.indexOf("Marina Minde (Rendbjerg)") == -1 && obj?.harbor.indexOf("Langballigau") == -1 && obj?.harbor.indexOf("Brunsnæs") == -1 && obj?.harbor.indexOf("Flensborg") == -1 && obj?.harbor.indexOf("Sønderhav") == -1) {
+                console.log(obj.harbor);
+                if (obj?.harbor == "Marina Minde (Rendbjerg)" && obj?.harbor == "Langballigau" && obj?.harbor == "Brunsnæs" && obj?.harbor == "Flensborg" && obj?.harbor == "Sønderhav") {
                     props?.to?.push("Marina Minde (Rendbjerg)")
                     props?.to?.push("Brunsnæs")
                     props?.to?.push("Langballigau")
@@ -123,6 +125,7 @@ export default function BookingForm(props) {
             body: JSON.stringify(order),
             method: "post"
         }).then(async (r) => r.json()).then((r) => {
+            setErrorMessage();
             if (r != "") {
                 setIsLoading(false);          
                 setAPIresults(r);
@@ -134,7 +137,8 @@ export default function BookingForm(props) {
 
         }).catch(async (e) => {
             setIsLoading(false);
-            setAPIresults(e);
+            setviewResult(false);
+            setErrorMessage("Sorry, we have some API errors!! \n" + e);
         })
     }
 
@@ -151,33 +155,18 @@ export default function BookingForm(props) {
         });
     }
 
+    useEffect(() => {
+        setChangeBooking((window.location.hash) ? window.location.hash.split("#")[1] : "single");
+    }, [window.location.hash, changeBooking])
+
     return (
         <>
-            <section className="booking__nav">
-                <button className={"booking__navitem " + (changeBooking === "single" ? "booking__navitem--selected" : "")} onClick={ () => setChangeBooking("single") }>Enkelt</button>
-                <button className={"booking__navitem " + (changeBooking === "event" ? "booking__navitem--selected" : "")} onClick={ () => setChangeBooking("event") }>Event</button>
-            </section>
-            {(changeBooking == "single") ? <SingleRouteForm
-                setFromHarbor={setFromHarbor}
-                setToHarbor={setToHarbor}
-                setDate={setDate}
-                setCurrency={setCurrency}
-                setCycle={setCycle}
-                setCycleType={setCycleType}
-                setPassagner={setPassagner}
-                setDisabled={setDisabled}
-                disabled={disabled}
-                currency={currency}
-                date={date}
-                searchItem={searchItem}
-                checkValue={checkValue}
-                passagener={passagener}
-                isLoading={isLoading}
-                setButtonDisabled={setButtonDisabled}
-                to={props.to}
-                from={props.from}
-                shipsId={shipsId} /> : (changeBooking == "event") ?
-                <EventRouteForm
+            <div className="intastellarBooking">
+                <section className="booking__nav">
+                    <button className={"booking__navitem " + (changeBooking === "single" ? "booking__navitem--selected" : "")} onClick={() => { setChangeBooking("single"); window.location.hash = "single" } }>Enkelt</button>
+                    <button className={"booking__navitem " + (changeBooking === "event" ? "booking__navitem--selected" : "")} onClick={() => { setChangeBooking("event"); window.location.hash = "event"; } }>Event</button>
+                </section>
+                {(changeBooking == "single") ? <SingleRouteForm
                     setFromHarbor={setFromHarbor}
                     setToHarbor={setToHarbor}
                     setDate={setDate}
@@ -188,48 +177,72 @@ export default function BookingForm(props) {
                     setDisabled={setDisabled}
                     disabled={disabled}
                     currency={currency}
-                    searchItem={searchItem}
                     date={date}
-                    passagener={passagener}
-                    setButtonDisabled={setButtonDisabled}
-                    buttonDisabled={buttonDisabled}
-                    isLoading={isLoading}
-                    to={props.to}
-                    from={props.from}
-                    shipsId={shipsId}
-                /> :
-                <SingleRouteForm
-                    setFromHarbor={setFromHarbor}
-                    setToHarbor={setToHarbor}
-                    setDate={setDate}
-                    setCurrency={setCurrency}
-                    setCycle={setCycle}
+                    searchItem={searchItem}
                     checkValue={checkValue}
-                    searchItem={searchItem}
-                    setCycleType={setCycleType}
-                    setPassagner={setPassagner}
-                    setDisabled={setDisabled}
-                    disabled={disabled}
-                    currency={currency}
-                    date={date}
                     passagener={passagener}
-                    setButtonDisabled={setButtonDisabled}
                     isLoading={isLoading}
+                    setButtonDisabled={setButtonDisabled}
                     to={props.to}
                     from={props.from}
-                    shipsId={shipsId}
-                />}
-            <section className="departures_Results">
-                {
-                    (isLoading) ? <p className="searchBar">Searching a ferry connection for you <LoadingBar /></p> : null
-                }
-                {
-                    (viewResult && changeBooking != "event" && Array.isArray(apiResults) && apiResults.length > 0 || typeof apiResults === "object") ? <SuccessWindow values={apiResults} order={ JSON.stringify(order) } /> : null
-                }
-                {
-                    (apiResults && typeof apiResults === "string" && apiResults == "No results") ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
-                }
-            </section>
+                    shipsId={shipsId} /> : (changeBooking == "event") ?
+                    <EventRouteForm
+                        setFromHarbor={setFromHarbor}
+                        setToHarbor={setToHarbor}
+                        setDate={setDate}
+                        setCurrency={setCurrency}
+                        setCycle={setCycle}
+                        setCycleType={setCycleType}
+                        setPassagner={setPassagner}
+                        setDisabled={setDisabled}
+                        disabled={disabled}
+                        currency={currency}
+                        searchItem={searchItem}
+                        date={date}
+                        passagener={passagener}
+                        setButtonDisabled={setButtonDisabled}
+                        buttonDisabled={buttonDisabled}
+                        isLoading={isLoading}
+                        to={props.to}
+                        from={props.from}
+                        shipsId={shipsId}
+                    /> :
+                    <SingleRouteForm
+                        setFromHarbor={setFromHarbor}
+                        setToHarbor={setToHarbor}
+                        setDate={setDate}
+                        setCurrency={setCurrency}
+                        setCycle={setCycle}
+                        checkValue={checkValue}
+                        searchItem={searchItem}
+                        setCycleType={setCycleType}
+                        setPassagner={setPassagner}
+                        setDisabled={setDisabled}
+                        disabled={disabled}
+                        currency={currency}
+                        date={date}
+                        passagener={passagener}
+                        setButtonDisabled={setButtonDisabled}
+                        isLoading={isLoading}
+                        to={props.to}
+                        from={props.from}
+                        shipsId={shipsId}
+                    />}
+                <section className="departures_Results">
+                    {
+                        (isLoading) ? <p className="searchBar">Searching a ferry connection for you <LoadingBar /></p> : null
+                    }
+                    {
+                        (viewResult && changeBooking != "event" && Array.isArray(apiResults) && apiResults.length > 0 || typeof apiResults === "object") ? <SuccessWindow values={apiResults} order={ JSON.stringify(order) } /> : null
+                    }
+                    {
+                        (apiResults && typeof apiResults === "string" && apiResults == "No results") ? <p>Sorry we didn´t find any routes. Try mabey to adjust date, time, destination or passagener number.</p> : null
+                    }
+                    {
+                        (errorMessage && errorMessage === "string") ? <p>{ errorMessage }</p> : null
+                    }
+                </section>
+            </div>
         </>
     )
 }

@@ -9,9 +9,8 @@ CREATE TABLE ships(
     `name` VARCHAR (900),
     PRIMARY KEY (id)
 ); CREATE TABLE stops(
-    id INT AUTO_INCREMENT,
-    `name` VARCHAR (900),
-    PRIMARY KEY (id)
+    id INT,
+    `name` VARCHAR (900)
 ); CREATE TABLE stops_per_route(
     id INT AUTO_INCREMENT,
     stop_id INT,
